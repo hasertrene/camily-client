@@ -1,0 +1,21 @@
+table {
+  width: auto;
+  height: 80%;
+  background-color: rgba(10, 10, 10, 0.1);
+  border-collapse: collapse;
+  thead {
+    background-color: rgba(200, 255, 100, 0.6);
+    th {
+      width: 200px;
+    }
+  }
+  .week {
+    background-color: rgba(200, 240, 200, 0.6);
+  }
+  tbody td {
+    border: 1px solid #ffffff;
+
+    padding: 0;
+    height: 100px;
+  }
+}
