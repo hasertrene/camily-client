@@ -1,0 +1,25 @@
+table {
+  border-collapse: collapse;
+  thead {
+    background-color: rgba(223, 152, 0, 0.966);
+    thead tr th {
+      padding: 4vh;
+    }
+  }
+  tbody {
+    td {
+      box-shadow: 2px 2px 1px rgba(10, 10, 10, 0.2);
+      align-content: flex-start;
+      padding: 1vh 0 0 1vh;
+      height: 15vh;
+      width: 10%;
+      border-radius: 20%;
+      background-color: rgba(250, 213, 1, 0.8);
+    }
+    td:hover {
+      background-color: rgb(255, 153, 0);
+      transform: scale3d(1.1, 1.1, 1.1);
+      transition: all ease-in-out 100ms;
+    }
+  }
+}
