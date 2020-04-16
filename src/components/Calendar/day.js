@@ -11,7 +11,7 @@ export default function Day(props) {
         today === day
           ? {
               backgroundColor: "rgba(255, 0, 0, 0.8)",
-              transition: "all ease-in-out 100ms",
+              transition: "all 0.2s ease",
             }
           : props.day === null
           ? {
