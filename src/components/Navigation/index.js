@@ -12,19 +12,17 @@ import "./style.scss";
 export default function Navigation() {
   const token = useSelector(selectToken);
 
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
-
   return (
     <Navbar bg='light' expand='lg' fixed='bottom'>
-      <Navbar.Brand as={NavLink} to='/'>
-        YOUR PROJECT NAME
+      <Navbar.Brand style={{ padding: ".5rem 1rem" }} as={NavLink} to='/'>
+        Camily
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path='/' linkText='Home' />
-          <NavbarItem path='/other' linkText='Other' />
-          {loginLogoutControls}
+          {token && <NavbarItem path='/' linkText='Calendar' />}
+          {token && <NavbarItem path='/other' linkText='Other' />}
+          {token ? <LoggedIn /> : <LoggedOut />}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

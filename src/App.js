@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
+import { selectToken } from "./store/user/selectors";
 import { Container } from "react-bootstrap";
 
 const Home = () => (
@@ -33,17 +34,18 @@ function App() {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
 
+  const token = useSelector(selectToken);
+
   return (
     <div className='App'>
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={token ? Calendar : Login} />
         <Route path='/other' component={Other} />
         <Route path='/signup' component={SignUp} />
         <Route path='/login' component={Login} />
       </Switch>
-      <Calendar />
       <Navigation />
     </div>
   );
