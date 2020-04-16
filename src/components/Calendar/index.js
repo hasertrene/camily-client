@@ -53,7 +53,7 @@ export default function Index() {
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
   if (firstDay !== 1) {
     const hollowDays = Array(Math.abs(1 - firstDay));
-    hollowDays.fill({ day: null }, 0);
+    hollowDays.fill({ id: 0, day: null, dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
 

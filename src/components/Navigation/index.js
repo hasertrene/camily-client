@@ -13,9 +13,9 @@ export default function Navigation() {
   const token = useSelector(selectToken);
 
   return (
-    <Navbar bg='light' expand='lg' fixed='bottom'>
-      <Navbar.Brand style={{ padding: ".5rem 1rem" }} as={NavLink} to='/'>
-        Camily
+    <Navbar bg='light' expand='lg' fixed='bottom' variant='light' bg='danger'>
+      <Navbar.Brand as={NavLink} to='/'>
+        <span className='logo'>Camily</span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
