@@ -79,7 +79,7 @@ export default function Index() {
   // console.log();
 
   return (
-    <Container className='main'>
+    <Container fluid className='main'>
       <Row className='header'>
         <Col>
           <Button

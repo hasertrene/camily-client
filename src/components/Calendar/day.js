@@ -12,14 +12,7 @@ export default function Day(props) {
       onMouseEnter={() => setDetails(true)}
       onMouseLeave={() => setDetails(false)}
       style={
-        props.dayOfTheWeek == 6 || props.dayOfTheWeek == 0
-          ? { color: "#999" }
-          : today === day
-          ? {
-              backgroundColor: "#d9534f",
-              transition: "all 0.2s ease",
-            }
-          : props.day === null
+        props.day === null
           ? {
               opacity: "0",
             }
@@ -28,7 +21,20 @@ export default function Day(props) {
       {/* {details && events ?
        SHOWDETAILS
        : ""} */}
-      {props.day}
+      <div
+        className='cell'
+        style={
+          props.dayOfTheWeek == 6 || props.dayOfTheWeek == 0
+            ? { color: "#999" }
+            : today === day
+            ? {
+                backgroundColor: "#d9534f",
+                transition: "all 0.2s ease",
+              }
+            : {}
+        }>
+        {props.day}
+      </div>
     </td>
   );
 }

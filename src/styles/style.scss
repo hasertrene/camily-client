@@ -1,7 +1,7 @@
 $base-color: #f0ad4e;
 $day-highlight: #d9534f;
-$calendar-cell: rgba(214, 229, 255, 0.2);
-$shadow: 2px 2px 1px rgba(10, 10, 10, 0.2);
+$calendar-cell: white;
+$shadow: 2px 2px 1px rgba(10, 10, 10, 0.3);
 $calendar-hover: rgb(255, 153, 0);
 $green: #5cb85cff;
 
@@ -30,19 +30,24 @@ $green: #5cb85cff;
   }
   tbody {
     td {
+      padding: 4px 0px;
+    }
+    .cell {
       font-weight: bold;
       box-shadow: $shadow;
       padding: 1.5vh 0 0 1.5vh;
       height: 15vh;
       width: 15vh;
-      border-radius: 10%;
+      border-radius: 10px;
+      border: 2px solid $calendar-cell;
       background-color: $calendar-cell;
       transition: all 0.3s ease;
     }
-    td:hover {
+    .cell:hover {
       background-color: $calendar-hover;
       transform: scale3d(1.1, 1.1, 1.1);
       transition: all 0.2s ease;
+      border-radius: 10px;
     }
   }
 }
