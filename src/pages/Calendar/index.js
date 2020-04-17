@@ -10,8 +10,8 @@ import {
   getDay,
   addDays,
 } from "date-fns";
-import Day from "./day";
-import "./style.scss";
+import Day from "../../components/Calendar/day";
+import "../../styles/style.scss";
 import { Button, Table, Container, Row, Col } from "react-bootstrap";
 
 export default function Index() {
@@ -80,24 +80,24 @@ export default function Index() {
 
   return (
     <Container className='main'>
-      <Row className='month'>
+      <Row className='header'>
         <Col>
           <Button
             size='lg'
-            variant='outline-secondary'
+            variant='outline-danger'
             onClick={() => setIncrementMonth(incrementMonth - 1)}>
             {" "}
-            {"<"}{" "}
+            &#8592;{" "}
           </Button>
         </Col>
         <Col>{format(month, "MMMM, yyyy")}</Col>
         <Col>
           <Button
             size='lg'
-            variant='outline-secondary'
+            variant='outline-danger'
             onClick={() => setIncrementMonth(incrementMonth + 1)}>
             {" "}
-            {">"}{" "}
+            &#8594;{" "}
           </Button>
         </Col>
       </Row>

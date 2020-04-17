@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
 import {} from "react-bootstrap";
+import "../../styles/style.scss";
 
 export default function Day(props) {
   const [details, setDetails] = useState(false);
@@ -15,7 +16,7 @@ export default function Day(props) {
           ? { color: "#999" }
           : today === day
           ? {
-              backgroundColor: "rgba(240, 0, 0, 0.8)",
+              backgroundColor: "#d9534f",
               transition: "all 0.2s ease",
             }
           : props.day === null

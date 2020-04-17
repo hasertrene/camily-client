@@ -1,8 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
 
-$base-color: #f5c000ad;
-$day-highlight: rgba(240, 0, 0, 0.8);
+$base-color: #f0ad4eff;
 
 html {
+  background-color: $base-color;
+}
+
+body {
+  background-color: $base-color;
+}
+
+.App {
   background-color: $base-color;
 }
