@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
-import { format } from "date-fns";
+import { format, getMonth } from "date-fns";
 
 export default function Events() {
   const dispatch = useDispatch();
@@ -31,16 +31,24 @@ export default function Events() {
       <Row className='header'>
         <Col>Events</Col>
       </Row>
-      <Row>Month</Row>
       <Row>
         <Col>
           {sortEvents.map((event) => (
-            <p>
-              {Object.values(event)[0].date}
+            <Card>
+              <Card.Title>
+                {format(
+                  new Date(
+                    2000,
+                    Object.values(event)[0].date.split("/")[1] - 1,
+                    1
+                  ),
+                  "MMMM"
+                )}
+              </Card.Title>
               {event.map((e) => (
                 <p>{e.title}</p>
               ))}
-            </p>
+            </Card>
           ))}
           <p></p>
         </Col>
