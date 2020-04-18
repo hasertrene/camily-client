@@ -15,11 +15,11 @@ export default function Events() {
   }, [dispatch]);
 
   let groups = events.reduce(function (r, o) {
-    var m = o.date.split("/")[1];
+    let m = o.date.split("/")[1];
     r[m] ? r[m].unshift(o) : (r[m] = [o]);
     return r;
   }, {});
-  var sortEvents = Object.keys(groups)
+  let sortEvents = Object.keys(groups)
     .sort((a, b) => a - b)
     .map(function (k) {
       return groups[k];
@@ -30,7 +30,7 @@ export default function Events() {
   // keys-flat
 
   return (
-    <Container fluid className='main'>
+    <Container className='main'>
       <Row className='header'>
         <Col>Events</Col>
       </Row>

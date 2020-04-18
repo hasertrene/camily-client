@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   format,
   eachDayOfInterval,
@@ -11,6 +11,9 @@ import {
   addDays,
 } from "date-fns";
 import Day from "../../components/Calendar/day";
+import { useDispatch, useSelector } from "react-redux";
+import { selectEvents } from "../../store/events/selectors";
+import { fetchEvents } from "../../store/events/actions";
 import "../../styles/style.scss";
 import { Button, Table, Container, Row, Col } from "react-bootstrap";
 
@@ -25,14 +28,21 @@ export default function Index() {
   const endMonth = format(endOfMonth(month), "d");
   const firstDay = getDay(startOfMonth(month));
 
+  const dispatch = useDispatch();
+  const events = useSelector(selectEvents);
+
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch]);
+
   let calendar = [];
 
   // For every day in the month, set up the information of that day
   for (var i = startMonth; i <= endMonth; i++) {
     const newDate = new Date(
-      parseInt(format(month, "yyyy")),
-      parseInt(format(month, "M")) - 1, // the month is 0-indexed
-      parseInt(i)
+      format(month, "yyyy"),
+      format(month, "MM") - 1, // the month is 0-indexed
+      i
     );
     // Get the days as strings, for the information per day
     const dayString = new Intl.DateTimeFormat(locale, {
@@ -41,13 +51,13 @@ export default function Index() {
 
     // Push the information per day
     calendar.push({
-      id: parseInt(i),
+      id: i,
       dayOfTheWeek: getDay(newDate),
       dayString: dayString.charAt(0).toUpperCase() + dayString.slice(1),
       weekNumber: getWeek(newDate),
-      day: parseInt(i),
-      month: parseInt(format(month, "M")),
-      year: parseInt(format(month, "yyyy")),
+      day: i,
+      month: format(month, "MM"),
+      year: format(month, "yyyy"),
     });
   }
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
@@ -76,10 +86,10 @@ export default function Index() {
 
   // console.log(week(calendar, 7));
   // console.log("calendar", calendar);
-  // console.log();
+  console.log(events);
 
   return (
-    <Container fluid className='main'>
+    <Container className='main'>
       <Row className='header'>
         <Col>
           <Button
@@ -117,7 +127,7 @@ export default function Index() {
           <tbody key={index}>
             <tr>
               {week.map((day, index) => (
-                <Day key={index} {...day} />
+                <Day key={index} {...day} events={events} />
               ))}
             </tr>
           </tbody>
