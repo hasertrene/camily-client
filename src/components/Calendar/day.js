@@ -35,7 +35,9 @@ export default function Day(props) {
               <div>
                 <span
                   key={event.id}
-                  style={{ color: `${event.member.colour}` }}>
+                  style={{
+                    color: `${event.member && event.member.colour}`,
+                  }}>
                   &#9632;
                 </span>
                 <span className='eventTitle'>
