@@ -1,6 +1,6 @@
-$base-color: #f0ad4e;
+$base-color: white;
 $day-highlight: #d9534f;
-$calendar-cell: white;
+$calendar-cell: rgba(200, 200, 200, 0.3);
 $shadow: 2px 2px 1px rgba(10, 10, 10, 0.3);
 $calendar-hover: rgb(255, 153, 0);
 $green: #5cb85cff;
@@ -16,7 +16,6 @@ $green: #5cb85cff;
   background-color: $base-color;
 }
 .table {
-  border-collapse: collapse;
   thead {
     background-color: $green;
     box-shadow: $shadow;
@@ -29,13 +28,10 @@ $green: #5cb85cff;
     }
   }
   tbody {
-    td {
-      padding: 4px 0px;
-    }
     .cell {
       font-weight: bold;
       box-shadow: $shadow;
-      padding: 1.5vh 0 0 1.5vh;
+      padding: 1.2vh 1vh 1vh 1.2vh;
       height: 15vh;
       width: 15vh;
       border-radius: 10px;
@@ -48,6 +44,16 @@ $green: #5cb85cff;
       transform: scale3d(1.1, 1.1, 1.1);
       transition: all 0.2s ease;
       border-radius: 10px;
+    }
+    .calEvents {
+      font-size: 15px;
+      line-height: 0.7rem;
+    }
+    .eventTitle {
+      font-size: 0.6rem;
+      color: black;
+      font-weight: 400;
+      margin: 2px;
     }
   }
 }

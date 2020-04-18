@@ -84,8 +84,6 @@ export default function Index() {
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
 
-  // console.log(week(calendar, 7));
-  // console.log("calendar", calendar);
   console.log(events);
 
   return (
@@ -111,7 +109,7 @@ export default function Index() {
           </Button>
         </Col>
       </Row>
-      <Table responsive='md' borderless className='table'>
+      <Table responsive='sm' borderless className='table'>
         <thead>
           <tr>
             {daysOfTheWeek.map((day, index) => (
@@ -127,7 +125,9 @@ export default function Index() {
           <tbody key={index}>
             <tr>
               {week.map((day, index) => (
-                <Day key={index} {...day} events={events} />
+                <td key={index} style={day.day ? {} : { opacity: "0" }}>
+                  <Day {...day} events={events} />
+                </td>
               ))}
             </tr>
           </tbody>
