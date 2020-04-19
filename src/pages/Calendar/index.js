@@ -3,8 +3,7 @@ import {
   format,
   eachDayOfInterval,
   addMonths,
-  getYear,
-  setYear,
+  addYears,
   endOfMonth,
   startOfMonth,
   getWeek,
@@ -31,8 +30,8 @@ import {
 export default function Calendar() {
   const date = new Date();
   const [incrementMonth, setIncrementMonth] = useState(0);
-  const [year, set_year] = useState(getYear(date));
-  const month = setYear(addMonths(date, incrementMonth), year);
+  const [incrementYear, setIncrementYear] = useState(0);
+  const month = addYears(addMonths(date, incrementMonth), incrementYear);
   const startMonth = format(startOfMonth(month), "d");
 
   const endMonth = format(endOfMonth(month), "d");
@@ -101,23 +100,12 @@ export default function Calendar() {
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
 
-  // set Year form, with tooltip
-  const [show, setShow] = useState(false);
-  const target = useRef(null);
-  const changeYear = (value) => {
-    if (value <= 0 || value > 2100) {
-      setShow(!show);
-    } else {
-      set_year(value);
-    }
-  };
-
   console.log(calendar, firstDay);
 
   return (
     <Container fluid className='main'>
       <Row className='header'>
-        <Col md={{ span: 1 }}>
+        <Col>
           <Button
             size='lg'
             variant='info'
@@ -126,26 +114,8 @@ export default function Calendar() {
             &#8592;{" "}
           </Button>
         </Col>
-        <Col md={{ offset: 3 }}>{format(month, "MMMM ")}</Col>
+        <Col>{format(month, "MMMM yyyy")}</Col>
         <Col>
-          <input
-            className='yearInput'
-            type='number'
-            size='4'
-            maxlength='4'
-            ref={target}
-            value={year}
-            onChange={(e) => changeYear(e.target.value)}
-          />
-          <Overlay target={target.current} show={show} placement='right'>
-            {(props) => (
-              <Tooltip id='overlay-example' {...props}>
-                Not a valid year!
-              </Tooltip>
-            )}
-          </Overlay>
-        </Col>
-        <Col md={{ span: 1 }}>
           <Button
             size='lg'
             variant='info'

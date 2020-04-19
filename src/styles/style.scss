@@ -55,7 +55,7 @@ input::-webkit-inner-spin-button {
     }
     .cell:hover {
       background-color: $calendar-hover;
-      transform: scale3d(1.1, 1.1, 1.1);
+      transform: scale3d(1.5, 1.5, 1.5);
       transition: all 0.2s ease;
       border-radius: 10px;
     }

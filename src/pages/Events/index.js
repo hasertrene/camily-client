@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
+// import { fetchMembers } from '../../store/user/actions'
 import Event from "../../components/Event";
 import { format, getMonth } from "date-fns";
 
@@ -12,6 +13,7 @@ export default function Events() {
 
   useEffect(() => {
     dispatch(fetchEvents());
+    // dispatch(fetchMembers())
   }, [dispatch]);
 
   let groups = events.reduce(function (r, o) {
@@ -27,10 +29,15 @@ export default function Events() {
 
   console.log(sortEvents);
 
-  // keys-flat
+  const randomColour =
+    "#" +
+    String(Math.round(Math.random() * 100)) +
+    String(Math.round(Math.random() * 100)) +
+    String(Math.round(Math.random() * 100)) +
+    "77";
 
   return (
-    <Container className='main'>
+    <Container fluid className='main'>
       <Row className='header'>
         <Col>Events</Col>
       </Row>
