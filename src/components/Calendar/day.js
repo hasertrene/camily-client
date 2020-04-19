@@ -8,10 +8,32 @@ export default function Day(props) {
   const day = props.day + "/" + props.month + "/" + props.year;
   const [details, showDetails] = useState(false);
 
-  const clickHandler = () => {
-    console.log("klik");
-  };
-
+  let color;
+  switch (props.dayOfTheWeek) {
+    case 0:
+      color = "#dbdbdb";
+      break;
+    case 1:
+      color = "#84d4d4";
+      break;
+    case 2:
+      color = "#f8fab8";
+      break;
+    case 3:
+      color = "#f8dc88";
+      break;
+    case 4:
+      color = "#f76a8c";
+      break;
+    case 5:
+      color = "#a0f088";
+      break;
+    case 6:
+      color = "#dbdbdb";
+      break;
+    default:
+      color = "white";
+  }
   return (
     <div
       className='cell'
@@ -20,10 +42,9 @@ export default function Day(props) {
           ? {
               backgroundColor: "#d9534f",
               transition: "all 0.2s ease",
+              border: "2px solid black",
             }
-          : props.dayOfTheWeek === 6 || props.dayOfTheWeek === 0
-          ? { color: "#999" }
-          : {}
+          : { backgroundColor: color }
       }
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
@@ -32,9 +53,8 @@ export default function Day(props) {
         {props.events.map(
           (event) =>
             event.date === day && (
-              <div>
+              <div key={event.id}>
                 <span
-                  key={event.id}
                   style={{
                     color: `${event.member && event.member.colour}`,
                   }}>

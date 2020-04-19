@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   format,
   eachDayOfInterval,
   addMonths,
-  addYears,
+  getYear,
+  setYear,
   endOfMonth,
   startOfMonth,
   getWeek,
@@ -15,18 +16,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
 import "../../styles/style.scss";
-import { Button, Table, Container, Row, Col } from "react-bootstrap";
+import {
+  Button,
+  Table,
+  Container,
+  Row,
+  Col,
+  Form,
+  InputGroup,
+  Overlay,
+  Tooltip,
+} from "react-bootstrap";
 
-export default function Index() {
-  const [incrementMonth, setIncrementMonth] = useState(0);
-  const [incrementYear, setIncrementYear] = useState(0);
-  const [locale, setLocale] = useState("en-US");
-
+export default function Calendar() {
   const date = new Date();
-  const month = addYears(addMonths(date, incrementMonth), incrementYear);
+  const [incrementMonth, setIncrementMonth] = useState(0);
+  const [year, set_year] = useState(getYear(date));
+  const month = setYear(addMonths(date, incrementMonth), year);
   const startMonth = format(startOfMonth(month), "d");
+
   const endMonth = format(endOfMonth(month), "d");
   const firstDay = getDay(startOfMonth(month));
+
+  const [locale, setLocale] = useState("en-US");
 
   const dispatch = useDispatch();
   const events = useSelector(selectEvents);
@@ -61,8 +73,13 @@ export default function Index() {
     });
   }
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
-  if (firstDay !== 1) {
+  if (firstDay > 1) {
     const hollowDays = Array(Math.abs(1 - firstDay));
+    hollowDays.fill({ id: 0, day: null, dayOfTheWeek: 7 }, 0);
+    calendar = hollowDays.concat(calendar);
+  }
+  if (firstDay === 0) {
+    const hollowDays = Array(6);
     hollowDays.fill({ id: 0, day: null, dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
@@ -84,55 +101,89 @@ export default function Index() {
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
 
-  console.log(events);
+  // set Year form, with tooltip
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+  const changeYear = (value) => {
+    if (value <= 0 || value > 2100) {
+      setShow(!show);
+    } else {
+      set_year(value);
+    }
+  };
+
+  console.log(calendar, firstDay);
 
   return (
-    <Container className='main'>
+    <Container fluid className='main'>
       <Row className='header'>
-        <Col>
+        <Col md={{ span: 1 }}>
           <Button
             size='lg'
-            variant='outline-danger'
+            variant='info'
             onClick={() => setIncrementMonth(incrementMonth - 1)}>
             {" "}
             &#8592;{" "}
           </Button>
         </Col>
-        <Col>{format(month, "MMMM, yyyy")}</Col>
+        <Col md={{ offset: 3 }}>{format(month, "MMMM ")}</Col>
         <Col>
+          <input
+            className='yearInput'
+            type='number'
+            size='4'
+            maxlength='4'
+            ref={target}
+            value={year}
+            onChange={(e) => changeYear(e.target.value)}
+          />
+          <Overlay target={target.current} show={show} placement='right'>
+            {(props) => (
+              <Tooltip id='overlay-example' {...props}>
+                Not a valid year!
+              </Tooltip>
+            )}
+          </Overlay>
+        </Col>
+        <Col md={{ span: 1 }}>
           <Button
             size='lg'
-            variant='outline-danger'
+            variant='info'
             onClick={() => setIncrementMonth(incrementMonth + 1)}>
             {" "}
             &#8594;{" "}
           </Button>
         </Col>
       </Row>
-      <Table responsive='sm' borderless className='table'>
-        <thead>
-          <tr>
-            {daysOfTheWeek.map((day, index) => (
-              <th key={index}>
-                {new Intl.DateTimeFormat(locale, { weekday: "long" }).format(
-                  day
-                )}
-              </th>
+      <Row>
+        <Col>
+          <Table responsive='md' borderless className='table'>
+            <thead>
+              <tr>
+                {daysOfTheWeek.map((day, index) => (
+                  <th key={index}>
+                    {new Intl.DateTimeFormat(locale, {
+                      weekday: "long",
+                    }).format(day)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            {week(calendar, 7).map((week, index) => (
+              <tbody key={index}>
+                {console.log(week)}
+                <tr>
+                  {week.map((day, index) => (
+                    <td key={index} style={day.day ? {} : { opacity: "0" }}>
+                      <Day {...day} events={events} />
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
             ))}
-          </tr>
-        </thead>
-        {week(calendar, 7).map((week, index) => (
-          <tbody key={index}>
-            <tr>
-              {week.map((day, index) => (
-                <td key={index} style={day.day ? {} : { opacity: "0" }}>
-                  <Day {...day} events={events} />
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        ))}
-      </Table>
+          </Table>
+        </Col>
+      </Row>
     </Container>
   );
 }

@@ -16,7 +16,7 @@ export default function Navigation() {
   const token = user.token;
 
   return (
-    <Navbar bg='light' expand='lg' fixed='bottom' variant='light' bg='danger'>
+    <Navbar bg='light' expand='lg' fixed='bottom' variant='dark' bg='info'>
       <Navbar.Brand as={NavLink} to='/'>
         <span className='logo'>Camily</span>
       </Navbar.Brand>
@@ -30,7 +30,7 @@ export default function Navigation() {
               <NavbarItem path='/family' linkText='Family'>
                 {user.name}
               </NavbarItem>
-              <Button variant='danger' onClick={() => dispatch(logOut())}>
+              <Button variant='info' onClick={() => dispatch(logOut())}>
                 Logout
               </Button>
             </>
