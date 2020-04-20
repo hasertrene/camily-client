@@ -91,6 +91,10 @@ export default function Calendar() {
     while (i < n) {
       weeks.push(days.slice(i, (i += len)));
     }
+    console.log(weeks);
+    weeks.forEach((week, i) => {
+      week.unshift();
+    });
     return weeks;
   }
 
@@ -101,7 +105,7 @@ export default function Calendar() {
   });
 
   return (
-    <Container fluid='sm' className='main'>
+    <Container fluid className='main'>
       <Row className='header'>
         <Col>
           <Button
@@ -125,7 +129,7 @@ export default function Calendar() {
       </Row>
       <Row>
         <Col>
-          <Table borderless className='table'>
+          <Table borderless size='sm' className='table'>
             <thead>
               <tr>
                 {daysOfTheWeek.map((day, index) => (

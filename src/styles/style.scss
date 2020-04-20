@@ -29,6 +29,8 @@ input::-webkit-inner-spin-button {
   -moz-appearance: textfield;
 }
 .table {
+  margin: auto;
+  max-width: 90%;
   thead {
     background-color: $green;
     box-shadow: $shadow;
@@ -36,19 +38,19 @@ input::-webkit-inner-spin-button {
       text-align: center;
       padding: 1vh;
       height: 5vh;
-      min-width: 10vw;
+      min-width: 8vw;
     }
   }
   tbody {
     td {
-      padding: 0.3rem;
+      padding: 1vh;
+      width: 15vw;
     }
     .cell {
       font-weight: bold;
       box-shadow: $shadow;
-      padding: 1.2vh 1vh 1vh 1.2vh;
+      padding: 1.2vh 0 1vh 1.2vh;
       height: 15vh;
-      width: 15vh;
       border-radius: 10px;
       border: 1px solid rgba(68, 68, 68, 0.3);
       transition: all 0.3s ease;

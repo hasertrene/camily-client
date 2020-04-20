@@ -14,7 +14,7 @@ export default function EventDetails(props) {
   const [wholeDay, setWholeDay] = useState(false);
   const user = useSelector(selectUser);
   const event = props.event;
-  console.log(user.members);
+
   return (
     <Modal
       {...props}
