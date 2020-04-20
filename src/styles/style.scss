@@ -53,6 +53,14 @@ input::-webkit-inner-spin-button {
       border: 1px solid rgba(68, 68, 68, 0.3);
       transition: all 0.3s ease;
     }
+    .weekno {
+      position: absolute;
+      top: 1.5vh;
+      right: 1.5vh;
+      font-size: 0.6rem;
+      color: black;
+      font-weight: 400;
+    }
     .cell:hover {
       background-color: $calendar-hover;
       transform: scale3d(1.5, 1.5, 1.5);

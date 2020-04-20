@@ -9,7 +9,6 @@ import {
 } from "../appState/actions";
 
 export const FETCH_EVENTS_SUCCESS = "FETCH_EVENTS_SUCCESS";
-export const EVENT_BY_MEMBER = "EVENT_BY_MEMBER";
 
 const fetchEventsSuccess = (events) => {
   return {
@@ -17,11 +16,6 @@ const fetchEventsSuccess = (events) => {
     payload: events,
   };
 };
-
-const fetchEventById = (events) => ({
-  type: EVENT_BY_MEMBER,
-  payload: events,
-});
 
 export const fetchEvents = () => {
   return async (dispatch, getState) => {

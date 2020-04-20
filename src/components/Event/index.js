@@ -6,7 +6,6 @@ export default function Event(props) {
   const member = props.member;
   const activity = props.activity;
   const colour = member ? member.colour : "#555555";
-  console.log(member && member.colour);
   return (
     <Card.Body style={{ backgroundColor: `${colour}77` }}>
       {" "}

@@ -47,7 +47,6 @@ export default function Calendar() {
   }, [dispatch]);
 
   let calendar = [];
-
   // For every day in the month, set up the information of that day
   for (var i = startMonth; i <= endMonth; i++) {
     const newDate = new Date(
@@ -65,7 +64,8 @@ export default function Calendar() {
       id: i,
       dayOfTheWeek: getDay(newDate),
       dayString: dayString.charAt(0).toUpperCase() + dayString.slice(1),
-      weekNumber: getWeek(newDate),
+      weekNumber:
+        getDay(newDate) === 0 ? getWeek(newDate) - 1 : getWeek(newDate),
       day: i,
       month: format(month, "MM"),
       year: format(month, "yyyy"),
@@ -100,10 +100,8 @@ export default function Calendar() {
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
 
-  console.log(calendar, firstDay);
-
   return (
-    <Container fluid className='main'>
+    <Container fluid='sm' className='main'>
       <Row className='header'>
         <Col>
           <Button
@@ -127,7 +125,7 @@ export default function Calendar() {
       </Row>
       <Row>
         <Col>
-          <Table responsive='md' borderless className='table'>
+          <Table borderless className='table'>
             <thead>
               <tr>
                 {daysOfTheWeek.map((day, index) => (
@@ -141,7 +139,6 @@ export default function Calendar() {
             </thead>
             {week(calendar, 7).map((week, index) => (
               <tbody key={index}>
-                {console.log(week)}
                 <tr>
                   {week.map((day, index) => (
                     <td key={index} style={day.day ? {} : { opacity: "0" }}>

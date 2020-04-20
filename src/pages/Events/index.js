@@ -16,28 +16,21 @@ export default function Events() {
     // dispatch(fetchMembers())
   }, [dispatch]);
 
-  let groups = events.reduce(function (r, o) {
-    let m = o.date.split("/")[1];
-    r[m] ? r[m].unshift(o) : (r[m] = [o]);
-    return r;
+  // Gather events per month: [m]
+  let groups = events.reduce(function (acc, event) {
+    let m = event.date.split("/")[1];
+    acc[m] ? acc[m].unshift(event) : (acc[m] = [event]);
+    return acc;
   }, {});
+  // Put events into arrays of that month
   let sortEvents = Object.keys(groups)
     .sort((a, b) => a - b)
     .map(function (k) {
       return groups[k];
     });
 
-  console.log(sortEvents);
-
-  const randomColour =
-    "#" +
-    String(Math.round(Math.random() * 100)) +
-    String(Math.round(Math.random() * 100)) +
-    String(Math.round(Math.random() * 100)) +
-    "77";
-
   return (
-    <Container fluid className='main'>
+    <Container fluid='sm' className='main'>
       <Row className='header'>
         <Col>Events</Col>
       </Row>
@@ -48,7 +41,7 @@ export default function Events() {
               (a, b) => a.date.split("")[1] - b.date.split("")[1]
             );
             return (
-              <Accordion defaultActiveKey={index}>
+              <Accordion key={index} defaultActiveKey={index}>
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey={index}>
                     {format(
@@ -60,8 +53,8 @@ export default function Events() {
                       "MMMM"
                     )}
                   </Accordion.Toggle>
-                  {events.map((e) => (
-                    <Accordion.Collapse eventKey={index}>
+                  {events.map((e, i) => (
+                    <Accordion.Collapse key={i} eventKey={index}>
                       <Event {...e} />
                     </Accordion.Collapse>
                   ))}

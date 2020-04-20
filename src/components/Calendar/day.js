@@ -23,10 +23,10 @@ export default function Day(props) {
       color = "#f8dc88";
       break;
     case 4:
-      color = "#f76a8c";
+      color = "#a0f088";
       break;
     case 5:
-      color = "#a0f088";
+      color = "#f76a8c";
       break;
     case 6:
       color = "#dbdbdb";
@@ -49,6 +49,7 @@ export default function Day(props) {
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
       {props.day}
+      <span className='weekno'>{details && `Week ${props.weekNumber}`}</span>
       <div className='calEvents'>
         {props.events.map(
           (event) =>
