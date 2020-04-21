@@ -83,19 +83,12 @@ export const postEvent = (
   };
 };
 
-export const updateEvent = (
-  id,
-  title,
-  description,
-  date,
-  time,
-  memberId,
-  activityId
-) => {
+export const updateEvent = (id, input) => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
     dispatch(appLoading());
     try {
+      const { title, description, date, time, activityId, memberId } = input;
       const response = await axios.patch(
         `${apiUrl}/events/${id}`,
         {
@@ -103,8 +96,8 @@ export const updateEvent = (
           description,
           date,
           time,
-          memberId,
           activityId,
+          memberId,
         },
         {
           headers: { Authorization: `Bearer ${token}` },

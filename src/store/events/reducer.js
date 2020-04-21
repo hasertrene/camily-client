@@ -6,12 +6,12 @@ import {
   EVENT_POSTED,
 } from "./actions";
 
-const initialState = [];
+const initialState = { events: [], activities: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_EVENTS_SUCCESS:
-      return action.payload;
+      return { ...action.payload };
     default:
       return state;
   }

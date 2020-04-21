@@ -27,6 +27,7 @@ export const fetchEvents = () => {
       });
       dispatch(fetchEventsSuccess(response.data));
       dispatch(appDoneLoading());
+      console.log("fetch", response.data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
