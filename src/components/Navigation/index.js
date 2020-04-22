@@ -9,6 +9,7 @@ import NavbarItem from "./NavbarItem";
 import LoggedOut from "./LoggedOut";
 import { logOut } from "../../store/user/actions";
 import "./style.scss";
+import AddEventButton from "../AddEventButton";
 
 export default function Navigation() {
   const dispatch = useDispatch();
@@ -16,10 +17,11 @@ export default function Navigation() {
   const token = user.token;
 
   return (
-    <Navbar bg='light' expand='lg' fixed='bottom' variant='dark' bg='info'>
+    <Navbar expand='lg' fixed='bottom' variant='dark' bg='info'>
       <Navbar.Brand as={NavLink} to='/'>
         <span className='logo'>Camily</span>
       </Navbar.Brand>
+      <AddEventButton />
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav style={{ width: "100%" }} fill>

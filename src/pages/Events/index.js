@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Card, Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
-// import { fetchMembers } from '../../store/user/actions'
 import Event from "../../components/Event";
-import { format, getMonth } from "date-fns";
+import { format } from "date-fns";
 
 export default function Events() {
   const dispatch = useDispatch();
@@ -13,12 +12,11 @@ export default function Events() {
 
   useEffect(() => {
     dispatch(fetchEvents());
-    // dispatch(fetchMembers())
   }, [dispatch]);
 
   // Gather events per month: [m]
   let groups = events.reduce(function (acc, event) {
-    let m = event.date.split("/")[1];
+    let m = event.date.split("-")[1];
     acc[m] ? acc[m].unshift(event) : (acc[m] = [event]);
     return acc;
   }, {});
@@ -38,7 +36,7 @@ export default function Events() {
         <Col>
           {sortEvents.map((event, index) => {
             const events = event.sort(
-              (a, b) => a.date.split("")[1] - b.date.split("")[1]
+              (a, b) => a.date.split("-")[2] - b.date.split("-")[2]
             );
             return (
               <Accordion key={index} defaultActiveKey={index}>
@@ -47,7 +45,7 @@ export default function Events() {
                     {format(
                       new Date(
                         2000,
-                        Object.values(event)[0].date.split("/")[1] - 1,
+                        Object.values(event)[0].date.split("-")[1] - 1,
                         1
                       ),
                       "MMMM"

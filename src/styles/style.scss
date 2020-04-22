@@ -16,18 +16,6 @@ $green: #5bc0de;
 }
 
 // Calendar
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.borderlessInput {
-  display: inline-block;
-  border: 0;
-  outline: none;
-  margin: 0;
-  -moz-appearance: textfield;
-}
 .table {
   margin: auto;
   max-width: 90%;
@@ -38,13 +26,13 @@ input::-webkit-inner-spin-button {
       text-align: center;
       padding: 1vh;
       height: 5vh;
-      min-width: 8vw;
+      min-width: 15vh;
     }
   }
   tbody {
     td {
       padding: 1vh;
-      width: 15vw;
+      width: 15vh;
     }
     .cell {
       font-weight: bold;
@@ -54,18 +42,14 @@ input::-webkit-inner-spin-button {
       border-radius: 10px;
       border: 1px solid rgba(68, 68, 68, 0.3);
       transition: all 0.3s ease;
+      overflow: scroll;
     }
-    .weekno {
-      position: absolute;
-      top: 1.5vh;
-      right: 1.5vh;
-      font-size: 0.6rem;
-      color: black;
-      font-weight: 400;
+    .cell::-webkit-scrollbar {
+      display: none;
     }
     .cell:hover {
       background-color: $calendar-hover;
-      transform: scale3d(1.5, 1.5, 1.5);
+      transform: scale3d(1.2, 1.2, 1.2);
       transition: all 0.2s ease;
       border-radius: 10px;
     }
@@ -77,6 +61,10 @@ input::-webkit-inner-spin-button {
       font-size: 0.6rem;
       color: black;
       font-weight: 400;
+      cursor: pointer;
+    }
+    .eventLink:hover {
+      text-decoration: underline;
     }
   }
 }

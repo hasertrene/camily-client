@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-import {} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import CalendarEvent from "../Event/CalenderEvent";
 import "../../styles/style.scss";
 
 export default function Day(props) {
-  const today = format(new Date(), "d/MM/yyyy");
-  const day = props.day + "/" + props.month + "/" + props.year;
+  const today = format(new Date(), "yyyy-MM-d");
+  const day = props.year + "-" + props.month + "-" + props.day;
   const [details, showDetails] = useState(false);
 
   let color;
@@ -34,6 +35,10 @@ export default function Day(props) {
     default:
       color = "white";
   }
+  console.log(
+    props.events.filter((e) => e.date === day),
+    day
+  );
   return (
     <div
       className='cell'
@@ -49,22 +54,11 @@ export default function Day(props) {
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
       {props.day}
-      <span className='weekno'>{details && `Week ${props.weekNumber}`}</span>
       <div className='calEvents'>
         {props.events.map(
           (event) =>
             event.date === day && (
-              <div key={event.id}>
-                <span
-                  style={{
-                    color: `${event.member && event.member.colour}`,
-                  }}>
-                  &#9632;
-                </span>
-                <span className='eventTitle'>
-                  {details && ` ${event.title}`}
-                </span>
-              </div>
+              <CalendarEvent key={event.id} event={event} details={details} />
             )
         )}
       </div>

@@ -6,7 +6,7 @@ import { login } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Col, Card } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");

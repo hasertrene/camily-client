@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
   format,
   eachDayOfInterval,
@@ -10,22 +10,12 @@ import {
   getDay,
   addDays,
 } from "date-fns";
-import Day from "../../components/Calendar/day";
+import Day from "../../components/Calendar/Day";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
 import "../../styles/style.scss";
-import {
-  Button,
-  Table,
-  Container,
-  Row,
-  Col,
-  Form,
-  InputGroup,
-  Overlay,
-  Tooltip,
-} from "react-bootstrap";
+import { Button, Table, Container, Row, Col } from "react-bootstrap";
 
 export default function Calendar() {
   const date = new Date();
@@ -91,7 +81,6 @@ export default function Calendar() {
     while (i < n) {
       weeks.push(days.slice(i, (i += len)));
     }
-    console.log(weeks);
     weeks.forEach((week, i) => {
       week.unshift();
     });

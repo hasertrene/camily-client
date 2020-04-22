@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 import { selectActs } from "../../store/events/selectors";
 import { selectUser } from "../../store/user/selectors";
-import {
-  updateEvent,
-  deleteEvent,
-  fetchEvents,
-} from "../../store/events/actions";
+import { fetchEvents } from "../../store/events/actions";
+import { postEvent } from "../../store/events/actions";
+
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import "../../styles/style.scss";
 
 export default function EventDetails(props) {
+  const history = useHistory();
+  const location = useLocation();
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
   const dispatch = useDispatch();
   const event = props.event;
   const [input, setInput] = useState({
-    title: event.title,
-    description: event.description,
-    date: event.date,
-    time: event.time,
-    activityId: event.activityId,
-    memberId: event.memberId,
+    title: "",
+    description: "",
+    date: "",
+    time: "",
+    activityId: "",
+    memberId: "",
   });
   const [wholeDay, setWholeDay] = useState(input.time);
 
   useEffect(() => {
     dispatch(fetchEvents());
-  }, [dispatch]);
+  }, [location.key, dispatch]);
 
   const inputHandler = (e) => {
     const name = e.target.name;
@@ -40,23 +41,11 @@ export default function EventDetails(props) {
     setInput({ ...input, time: null });
   };
 
-  const submitChanges = () => {
-    dispatch(updateEvent(event.id, input));
+  const addEvent = () => {
+    dispatch(postEvent(input));
     props.onHide();
   };
-
-  const handleDelete = (id) => {
-    if (
-      window.confirm(`Are you sure you want to delete: ${props.title}?`) ===
-      true
-    ) {
-      dispatch(deleteEvent(id));
-      props.onHide();
-    } else {
-      console.log("Canceled");
-    }
-  };
-
+  // console.log(location.key);
   return (
     <Modal
       {...props}
@@ -64,7 +53,7 @@ export default function EventDetails(props) {
       aria-labelledby='contained-modal-title-vcenter'
       centered>
       <Modal.Header closeButton>
-        <Modal.Title id='contained-modal-title-vcenter'>Edit event</Modal.Title>
+        <Modal.Title id='contained-modal-title-vcenter'>Add event</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -163,17 +152,9 @@ export default function EventDetails(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='info' type='submit' onClick={() => submitChanges()}>
-          Save changes...
+        <Button variant='info' type='submit' onClick={() => addEvent()}>
+          Add event
         </Button>
-        {props.remove && (
-          <Button
-            variant='info'
-            style={{ align: "left" }}
-            onClick={() => handleDelete(event.id)}>
-            Delete
-          </Button>
-        )}
         <Button variant='info' onClick={props.onHide}>
           Cancel
         </Button>

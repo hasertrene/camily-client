@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Button, ButtonGroup } from "react-bootstrap";
-import { format } from "date-fns";
-import EventDetails from "../EventDetails/index";
+import EventDetails from "../EventDetails";
+import { useDispatch } from "react-redux";
+import { deleteEvent } from "../../store/events/actions";
 
 export default function Event(props) {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const dispatch = useDispatch();
   const member = props.member;
   const activity = props.activity;
   const colour = member ? member.colour : "#555555";
 
   const handleDelete = (id) => {
     window.confirm(`Are you sure you want to delete: ${props.title}?`)
-      ? console.log(id)
+      ? dispatch(deleteEvent(id))
       : console.log("Toch niet");
   };
+
+  useEffect(() => {}, [dispatch]);
 
   return (
     <Card.Body style={{ backgroundColor: `${colour}77` }}>
@@ -26,14 +30,14 @@ export default function Event(props) {
               borderRadius: "20px",
               padding: "8px",
             }}>
-            {props.date.slice(0, 2)}
+            {props.date.split("-")[2]}
           </span>{" "}
         </Col>
         <Col>
           <strong>{props.title}</strong>
         </Col>{" "}
         <Col>
-          <em>{props.time ? props.time : `Whole day`}</em>
+          <em>{props.time ? props.time : `All-day`}</em>
         </Col>{" "}
         <Col>{activity ? activity.type : ""}</Col>{" "}
         <Col>
