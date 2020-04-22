@@ -5,8 +5,8 @@ import CalendarEvent from "../Event/CalenderEvent";
 import "../../styles/style.scss";
 
 export default function Day(props) {
-  const today = format(new Date(), "yyyy-MM-d");
-  const day = props.year + "-" + props.month + "-" + props.day;
+  const today = format(new Date(), "yyyy-MM-dd");
+  const day = props.date;
   const [details, showDetails] = useState(false);
 
   let color;
@@ -53,7 +53,7 @@ export default function Day(props) {
       }
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
-      {props.day}
+      {format(new Date(props.date), "d")}
       <div className='calEvents'>
         {props.events.map(
           (event) =>

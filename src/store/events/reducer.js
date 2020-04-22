@@ -12,14 +12,10 @@ export default (state = initialState, action) => {
     case FETCH_EVENTS_SUCCESS:
       return { ...action.payload };
 
-    case EVENT_UPDATED: {
-      // return state.events.map((event) => {
-      //   if (event.id !== action.payload.id) {
-      //     return event;
-      //   }
-      return { ...state, events: [...state.events, action.payload] };
-      //   });
-    }
+    case EVENT_UPDATED:
+      const newList = state.events.filter((e) => e.id !== action.payload.id);
+      return { ...state, events: [...newList, action.payload] };
+
     case EVENT_POSTED:
       return { ...state, events: [...state.events, action.payload] };
 

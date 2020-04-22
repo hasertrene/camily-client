@@ -22,9 +22,9 @@ export default function Calendar() {
   const [incrementMonth, setIncrementMonth] = useState(0);
   const [incrementYear, setIncrementYear] = useState(0);
   const month = addYears(addMonths(date, incrementMonth), incrementYear);
-  const startMonth = format(startOfMonth(month), "d");
+  const startMonth = format(startOfMonth(month), "dd");
 
-  const endMonth = format(endOfMonth(month), "d");
+  const endMonth = format(endOfMonth(month), "dd");
   const firstDay = getDay(startOfMonth(month));
 
   const [locale, setLocale] = useState("en-US");
@@ -56,20 +56,18 @@ export default function Calendar() {
       dayString: dayString.charAt(0).toUpperCase() + dayString.slice(1),
       weekNumber:
         getDay(newDate) === 0 ? getWeek(newDate) - 1 : getWeek(newDate),
-      day: i,
-      month: format(month, "MM"),
-      year: format(month, "yyyy"),
+      date: format(new Date(newDate), "yyyy-MM-dd"),
     });
   }
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
   if (firstDay > 1) {
     const hollowDays = Array(Math.abs(1 - firstDay));
-    hollowDays.fill({ id: 0, day: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 0, date: null, dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
   if (firstDay === 0) {
     const hollowDays = Array(6);
-    hollowDays.fill({ id: 0, day: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 0, date: null, dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
 
@@ -134,7 +132,7 @@ export default function Calendar() {
               <tbody key={index}>
                 <tr>
                   {week.map((day, index) => (
-                    <td key={index} style={day.day ? {} : { opacity: "0" }}>
+                    <td key={index} style={day.date ? {} : { opacity: "0" }}>
                       <Day {...day} events={events} />
                     </td>
                   ))}

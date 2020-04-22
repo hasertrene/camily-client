@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
 import { selectActs } from "../../store/events/selectors";
 import { selectUser } from "../../store/user/selectors";
 import { fetchEvents } from "../../store/events/actions";
@@ -10,25 +9,16 @@ import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import "../../styles/style.scss";
 
 export default function EventDetails(props) {
-  const history = useHistory();
-  const location = useLocation();
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
   const dispatch = useDispatch();
   const event = props.event;
-  const [input, setInput] = useState({
-    title: "",
-    description: "",
-    date: "",
-    time: "",
-    activityId: "",
-    memberId: "",
-  });
+  const [input, setInput] = useState({});
   const [wholeDay, setWholeDay] = useState(input.time);
 
   useEffect(() => {
     dispatch(fetchEvents());
-  }, [location.key, dispatch]);
+  }, [dispatch]);
 
   const inputHandler = (e) => {
     const name = e.target.name;
@@ -44,8 +34,8 @@ export default function EventDetails(props) {
   const addEvent = () => {
     dispatch(postEvent(input));
     props.onHide();
+    setInput({});
   };
-  // console.log(location.key);
   return (
     <Modal
       {...props}
