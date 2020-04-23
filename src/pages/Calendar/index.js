@@ -96,8 +96,6 @@ export default function Calendar() {
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
 
-  console.log(week(calendar, 7));
-
   return (
     <Container fluid className='main'>
       <Row className='header'>

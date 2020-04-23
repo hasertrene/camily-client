@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
 import CalendarEvent from "../Event/CalenderEvent";
 import "../../styles/style.scss";
 

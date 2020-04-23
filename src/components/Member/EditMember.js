@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { patchMember } from "../../store/user/actions";
 
@@ -39,7 +39,6 @@ export default function EventDetails(props) {
     history.push(history.location.pathname);
   };
 
-  console.log(input);
   return (
     <Modal
       {...props}

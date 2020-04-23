@@ -11,7 +11,7 @@ import {
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import "../../styles/style.scss";
 
-export default function EventDetails(props) {
+export default function EditEvent(props) {
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
   const history = useHistory();
@@ -45,7 +45,6 @@ export default function EventDetails(props) {
   const submitChanges = () => {
     dispatch(updateEvent(event.id, input));
     props.onHide();
-    console.log(history);
     history.push(history.location.pathname);
   };
 

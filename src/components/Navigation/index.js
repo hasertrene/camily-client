@@ -17,30 +17,32 @@ export default function Navigation() {
   const token = user.token;
 
   return (
-    <Navbar expand='lg' fixed='bottom' variant='dark' bg='info'>
-      <Navbar.Brand as={NavLink} to='/'>
-        <span className='logo'>Camily</span>
-      </Navbar.Brand>
-      <AddEventButton />
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav style={{ width: "100%" }} fill>
-          {token && <NavbarItem path='/' linkText='Calendar' />}
-          {token && <NavbarItem path='/events' linkText='Events' />}
-          {token ? (
-            <>
-              <NavbarItem path='/family' linkText='Family'>
-                {user.name}
-              </NavbarItem>
-              <Button variant='info' onClick={() => dispatch(logOut())}>
-                Logout
-              </Button>
-            </>
-          ) : (
-            <LoggedOut />
-          )}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <>
+      <Navbar expand='lg' fixed='bottom' variant='dark' bg='info'>
+        <Navbar.Brand as={NavLink} to='/'>
+          <span className='logo'>Camily</span>
+        </Navbar.Brand>
+        <AddEventButton />
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav style={{ width: "100%" }} fill>
+            {token && <NavbarItem path='/' linkText='Calendar' />}
+            {token && <NavbarItem path='/events' linkText='Events' />}
+            {token ? (
+              <>
+                <NavbarItem path='/family' linkText='Family'>
+                  {user.name}
+                </NavbarItem>
+                <Button variant='info' onClick={() => dispatch(logOut())}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <LoggedOut />
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
   );
 }

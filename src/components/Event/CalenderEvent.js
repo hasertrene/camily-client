@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EventDetails from "../EventDetails";
+import EditEvent from "./EditEvent";
 
 export default function CalenderEvent(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -16,7 +16,7 @@ export default function CalenderEvent(props) {
       <span className='eventTitle' onClick={() => setModalShow(true)}>
         {props.details && <span className='eventLink'>{event.title}</span>}
       </span>
-      <EventDetails
+      <EditEvent
         remove='true'
         show={modalShow}
         onHide={() => setModalShow(false)}

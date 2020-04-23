@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Button, ButtonGroup } from "react-bootstrap";
-import EventDetails from "../EventDetails";
+import EditEvent from "./EditEvent";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events/actions";
 
@@ -22,7 +22,7 @@ export default function Event(props) {
   return (
     <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}
-      <Row>
+      <Row style={{ cursor: "pointer" }} onClick={() => setModalShow(true)}>
         <Col>
           <span
             style={{
@@ -45,16 +45,16 @@ export default function Event(props) {
         </Col>{" "}
         <Col>
           <ButtonGroup>
-            <Button variant='info' onClick={() => setModalShow(true)}>
+            {/* <Button variant='info' onClick={() => setModalShow(true)}>
               Edit
-            </Button>
+            </Button> */}
             <Button variant='info' onClick={() => handleDelete(props.id)}>
               Delete
             </Button>
           </ButtonGroup>
         </Col>
       </Row>
-      <EventDetails
+      <EditEvent
         show={modalShow}
         onHide={() => setModalShow(false)}
         event={props}
