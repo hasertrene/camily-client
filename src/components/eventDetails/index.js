@@ -155,12 +155,11 @@ export default function EventDetails(props) {
                 name='memberId'
                 onChange={inputHandler}>
                 <option value='null'>Everybody</option>
-                {user.members &&
-                  user.members.map((member) => (
-                    <option key={member.id} value={member.id}>
-                      {member.firstName}
-                    </option>
-                  ))}
+                {user.members.map((member) => (
+                  <option key={member.id} value={member.id}>
+                    {member.firstName}
+                  </option>
+                ))}
               </Form.Control>
             </Col>
           </Form.Group>

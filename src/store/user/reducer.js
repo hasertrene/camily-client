@@ -5,6 +5,7 @@ import {
   POST_MEMBER_SUCCESS,
   PATCH_MEMBER_SUCCESS,
   DELETE_MEMBER_SUCCESS,
+  UPDATE_USER,
 } from "./actions";
 
 const initialState = {
@@ -23,6 +24,9 @@ export default (state = initialState, action) => {
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState, token: null };
+
+    case UPDATE_USER:
+      return { ...state, ...action.payload };
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };

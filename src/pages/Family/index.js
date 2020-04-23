@@ -5,13 +5,17 @@ import { selectUser } from "../../store/user/selectors";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import AddMember from "../../components/Member/AddMember";
 import EditMember from "../../components/Member/EditMember";
-import { getUserWithStoredToken, deleteMember } from "../../store/user/actions";
+import {
+  getUserWithStoredToken,
+  deleteMember,
+  updateUser,
+} from "../../store/user/actions";
 
 export default function Family() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [member, setMember] = useState({});
   const [modalShow, setModalShow] = useState(false);
@@ -21,7 +25,17 @@ export default function Family() {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
 
-  const submitForm = () => {};
+  const submitForm = () => {
+    let submitEmail = email;
+    let submitName = name;
+    if (!email) {
+      submitEmail = user.email;
+    }
+    if (!name) {
+      submitName = user.name;
+    }
+    dispatch(updateUser(submitEmail, password, submitName));
+  };
   const handleDelete = (id) => {
     dispatch(deleteMember(id));
   };
@@ -37,20 +51,18 @@ export default function Family() {
         <Form.Group controlId='formBasicName'>
           <Form.Label>Family name</Form.Label>
           <Form.Control
-            value={name}
+            defaultValue={user.name}
             onChange={(event) => setName(event.target.value)}
             type='text'
-            placeholder={user.name}
             required
           />
         </Form.Group>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            value={email}
             onChange={(event) => setEmail(event.target.value)}
             type='email'
-            placeholder={user.email}
+            defaultValue={user.email}
             required
           />
           <Form.Text className='text-muted'></Form.Text>

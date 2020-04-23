@@ -48,17 +48,17 @@ const deleteMemberSuccess = (member) => ({
 
 export const logOut = () => ({ type: LOG_OUT });
 
-export const UpdateUser = (name, email, password) => {
+export const updateUser = (email, password, name) => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
     dispatch(appLoading());
     try {
       const response = await axios.patch(
-        `${apiUrl}/signup`,
+        `${apiUrl}/update`,
         {
-          name,
           email,
           password,
+          name,
         },
         {
           headers: { Authorization: `Bearer ${token}` },

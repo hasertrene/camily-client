@@ -54,7 +54,12 @@ export default function Day(props) {
         {props.events.map(
           (event) =>
             event.date === day && (
-              <CalendarEvent key={event.id} event={event} details={details} />
+              <CalendarEvent
+                key={event.id}
+                event={event}
+                details={details}
+                user={props.user}
+              />
             )
         )}
       </div>
