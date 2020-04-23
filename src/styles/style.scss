@@ -15,6 +15,11 @@ $table-head: #5bc0de;
   background-color: $base-color;
 }
 
+//Events
+.eventClick {
+  cursor: pointer;
+}
+
 // Calendar
 .table {
   margin: auto;
@@ -46,12 +51,11 @@ $table-head: #5bc0de;
     }
     .cell-btn {
       font-size: 1.5rem;
-      opacity: 0.1;
+      opacity: 0.2;
       cursor: pointer;
     }
     .cell-btn:hover {
       opacity: 1;
-      transition: all 0.2s ease;
     }
     .cell::-webkit-scrollbar {
       display: none;

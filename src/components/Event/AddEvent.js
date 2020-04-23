@@ -11,7 +11,6 @@ export default function AddEvent(props) {
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
   const dispatch = useDispatch();
-  const event = props.event;
   const [input, setInput] = useState({});
   const [wholeDay, setWholeDay] = useState(input.time);
 

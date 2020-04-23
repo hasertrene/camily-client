@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import CalendarEvent from "../Event/CalenderEvent";
 import AddEvent from "../Event/AddEvent";
-import { Button } from "react-bootstrap";
 
 export default function Day(props) {
   const today = format(new Date(), "yyyy-MM-dd");
@@ -51,7 +50,6 @@ export default function Day(props) {
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
       {format(new Date(props.date), "d")}
-
       <div className='calEvents'>
         {props.events.map(
           (event) =>

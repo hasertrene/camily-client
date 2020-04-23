@@ -22,7 +22,7 @@ export default function Event(props) {
   return (
     <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}
-      <Row style={{ cursor: "pointer" }} onClick={() => setModalShow(true)}>
+      <Row>
         <Col>
           <span
             style={{
@@ -33,14 +33,16 @@ export default function Event(props) {
             {props.date.split("-")[2]}
           </span>{" "}
         </Col>
-        <Col>
+        <Col className='eventClick' onClick={() => setModalShow(true)}>
           <strong>{props.title}</strong>
         </Col>{" "}
-        <Col>
+        <Col className='eventClick' onClick={() => setModalShow(true)}>
           <em>{props.time ? props.time : `All-day`}</em>
         </Col>{" "}
-        <Col>{activity ? activity.type : ""}</Col>{" "}
-        <Col>
+        <Col className='eventClick' onClick={() => setModalShow(true)}>
+          {activity ? activity.type : ""}
+        </Col>{" "}
+        <Col className='eventClick' onClick={() => setModalShow(true)}>
           <strong>{member ? member.firstName : "Everybody"}</strong>
         </Col>{" "}
         <Col>
