@@ -6,9 +6,8 @@ import { fetchEvents } from "../../store/events/actions";
 import { postEvent } from "../../store/events/actions";
 
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
-import "../../styles/style.scss";
 
-export default function EventDetails(props) {
+export default function AddEvent(props) {
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
   const dispatch = useDispatch();
@@ -107,7 +106,6 @@ export default function EventDetails(props) {
             <Col sm='10'>
               <Form.Control
                 as='select'
-                defaultValue={event.activityId}
                 name='activityId'
                 onChange={inputHandler}>
                 {acts &&
@@ -124,11 +122,7 @@ export default function EventDetails(props) {
               <Form.Label sm='2'>For whom?</Form.Label>{" "}
             </Col>
             <Col sm='10'>
-              <Form.Control
-                as='select'
-                defaultValue={event.memberId}
-                name='memberId'
-                onChange={inputHandler}>
+              <Form.Control as='select' name='memberId' onChange={inputHandler}>
                 <option value='null'>Everybody</option>
                 {user.members &&
                   user.members.map((member) => (

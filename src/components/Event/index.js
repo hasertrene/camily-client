@@ -45,9 +45,6 @@ export default function Event(props) {
         </Col>{" "}
         <Col>
           <ButtonGroup>
-            {/* <Button variant='info' onClick={() => setModalShow(true)}>
-              Edit
-            </Button> */}
             <Button variant='info' onClick={() => handleDelete(props.id)}>
               Delete
             </Button>

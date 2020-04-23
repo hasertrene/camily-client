@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
 import CalendarEvent from "../Event/CalenderEvent";
-import "../../styles/style.scss";
+import AddEvent from "../Event/AddEvent";
+import { Button } from "react-bootstrap";
 
 export default function Day(props) {
   const today = format(new Date(), "yyyy-MM-dd");
   const day = props.date;
   const [details, showDetails] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   let color;
   switch (props.dayOfTheWeek) {
@@ -49,6 +51,7 @@ export default function Day(props) {
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
       {format(new Date(props.date), "d")}
+
       <div className='calEvents'>
         {props.events.map(
           (event) =>
@@ -61,7 +64,11 @@ export default function Day(props) {
               />
             )
         )}
+        <span onClick={() => setModalShow(true)} className='cell-btn'>
+          +
+        </span>
       </div>
+      <AddEvent show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 }

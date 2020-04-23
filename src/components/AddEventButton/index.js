@@ -5,7 +5,7 @@ import AddEvent from "../Event/AddEvent";
 export default function AddEventButton(props) {
   const [modalShow, setModalShow] = useState(false);
   return (
-    <span>
+    <span className='addbutton'>
       <img
         onClick={() => setModalShow(true)}
         src='/images/add.png'
