@@ -11,6 +11,10 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const UPDATE_USER = "UPDATE_USER";
+export const POST_MEMBER_SUCCESS = "POST_MEMBER_SUCCESS";
+export const PATCH_MEMBER_SUCCESS = "PATCH_MEMBER_SUCCESS";
+export const DELETE_MEMBER_SUCCESS = "DELETE_MEMBER_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -24,7 +28,56 @@ const tokenStillValid = (userWithoutToken) => ({
   payload: userWithoutToken,
 });
 
+const updateUserSuccess = (user) => ({
+  type: UPDATE_USER,
+  payload: user,
+});
+
+const postMemberSuccess = (member) => ({
+  type: POST_MEMBER_SUCCESS,
+  payload: member,
+});
+const patchMemberSuccess = (member) => ({
+  type: PATCH_MEMBER_SUCCESS,
+  payload: member,
+});
+const deleteMemberSuccess = (member) => ({
+  type: DELETE_MEMBER_SUCCESS,
+  payload: member,
+});
+
 export const logOut = () => ({ type: LOG_OUT });
+
+export const UpdateUser = (name, email, password) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    dispatch(appLoading());
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/signup`,
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      dispatch(updateUserSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -105,6 +158,96 @@ export const getUserWithStoredToken = () => {
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const postMember = (input) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const { firstName, birthday, gender, colour, parent } = input;
+    if (token === null) return;
+    dispatch(appLoading());
+    try {
+      const response = await axios.post(
+        `${apiUrl}/me`,
+        {
+          firstName,
+          birthday,
+          gender,
+          colour,
+          parent,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(postMemberSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const patchMember = (input) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const { id, firstName, birthday, gender, colour, parent } = input;
+    if (token === null) return;
+    dispatch(appLoading());
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/me/${id}`,
+        {
+          firstName,
+          birthday,
+          gender,
+          colour,
+          parent,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(patchMemberSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+export const deleteMember = (id) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    if (token === null) return;
+    dispatch(appLoading());
+    try {
+      const response = await axios.delete(`${apiUrl}/me/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      dispatch(deleteMemberSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
       dispatch(appDoneLoading());
     }
   };

@@ -62,12 +62,12 @@ export default function Calendar() {
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
   if (firstDay > 1) {
     const hollowDays = Array(Math.abs(1 - firstDay));
-    hollowDays.fill({ id: 0, date: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 9, date: null, dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
   if (firstDay === 0) {
     const hollowDays = Array(6);
-    hollowDays.fill({ id: 0, date: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 10, date: null, dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
 
@@ -80,7 +80,10 @@ export default function Calendar() {
       weeks.push(days.slice(i, (i += len)));
     }
     weeks.forEach((week, i) => {
-      week.unshift();
+      const weekno = week.find((obj) => {
+        return obj.weekNumber;
+      });
+      week.unshift({ id: 6, date: 100, number: weekno.weekNumber });
     });
     return weeks;
   }
@@ -90,6 +93,8 @@ export default function Calendar() {
     start: new Date(new Date("December 25, 1995 23:15:30")),
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
+
+  console.log(week(calendar, 7));
 
   return (
     <Container fluid className='main'>
@@ -119,6 +124,7 @@ export default function Calendar() {
           <Table borderless size='sm' className='table'>
             <thead>
               <tr>
+                <th>#</th>
                 {daysOfTheWeek.map((day, index) => (
                   <th key={index}>
                     {new Intl.DateTimeFormat(locale, {
@@ -133,7 +139,18 @@ export default function Calendar() {
                 <tr>
                   {week.map((day, index) => (
                     <td key={index} style={day.date ? {} : { opacity: "0" }}>
-                      <Day {...day} events={events} />
+                      {day.number ? (
+                        <div
+                          style={{
+                            fontSize: "10vh",
+                            color: "#00000033",
+                            justifyContent: "justify",
+                          }}>
+                          {day.number}
+                        </div>
+                      ) : (
+                        <Day {...day} events={events} />
+                      )}
                     </td>
                   ))}
                 </tr>

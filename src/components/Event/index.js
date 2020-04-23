@@ -20,7 +20,7 @@ export default function Event(props) {
   useEffect(() => {}, [dispatch]);
 
   return (
-    <Card.Body style={{ backgroundColor: `${colour}77` }}>
+    <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}
       <Row>
         <Col>

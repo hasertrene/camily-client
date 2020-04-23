@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectActs } from "../../store/events/selectors";
 import { selectUser } from "../../store/user/selectors";
+import { useHistory } from "react-router-dom";
 import {
   updateEvent,
   deleteEvent,
@@ -13,6 +14,7 @@ import "../../styles/style.scss";
 export default function EventDetails(props) {
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
+  const history = useHistory();
   const dispatch = useDispatch();
   const event = props.event;
   const [input, setInput] = useState({
@@ -27,7 +29,7 @@ export default function EventDetails(props) {
 
   useEffect(() => {
     dispatch(fetchEvents());
-  }, [dispatch]);
+  }, [history.location.key, dispatch]);
 
   const inputHandler = (e) => {
     const name = e.target.name;
@@ -43,6 +45,8 @@ export default function EventDetails(props) {
   const submitChanges = () => {
     dispatch(updateEvent(event.id, input));
     props.onHide();
+    console.log(history);
+    history.push(history.location.pathname);
   };
 
   const handleDelete = (id) => {

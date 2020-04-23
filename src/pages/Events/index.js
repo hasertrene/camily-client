@@ -42,14 +42,7 @@ export default function Events() {
               <Accordion key={index} defaultActiveKey={index}>
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey={index}>
-                    {format(
-                      new Date(
-                        2000,
-                        Object.values(event)[0].date.split("-")[1] - 1,
-                        1
-                      ),
-                      "MMMM"
-                    )}
+                    {format(new Date(event[0].date), "MMMM")}
                   </Accordion.Toggle>
                   {events.map((e, i) => (
                     <Accordion.Collapse key={i} eventKey={index}>

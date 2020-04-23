@@ -35,10 +35,6 @@ export default function Day(props) {
     default:
       color = "white";
   }
-  console.log(
-    props.events.filter((e) => e.date === day),
-    day
-  );
   return (
     <div
       className='cell'
