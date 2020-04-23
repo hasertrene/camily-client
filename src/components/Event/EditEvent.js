@@ -153,7 +153,7 @@ export default function EditEvent(props) {
                 defaultValue={event.memberId}
                 name='memberId'
                 onChange={inputHandler}>
-                <option value='null'>Everybody</option>
+                <option value={null}>Everybody</option>
                 {user.members.map((member) => (
                   <option key={member.id} value={member.id}>
                     {member.firstName}

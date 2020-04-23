@@ -19,7 +19,7 @@ export default function EventDetails(props) {
     parent: member.parent,
   };
   const [input, setInput] = useState(initialInput);
-  const [parent, setParent] = useState(member.parent);
+  // const [isChecked, setIsChecked] = useState(member.parent);
 
   const inputHandler = (e) => {
     const name = e.target.name;
@@ -27,10 +27,11 @@ export default function EventDetails(props) {
     setInput({
       ...input,
       ...initialInput,
-      parent: parent,
       [name]: value,
     });
   };
+
+  console.log(input);
 
   const editMember = () => {
     dispatch(patchMember(input));
@@ -39,6 +40,7 @@ export default function EventDetails(props) {
     history.push(history.location.pathname);
   };
 
+  console.log(member.parent);
   return (
     <Modal
       {...props}
@@ -88,12 +90,14 @@ export default function EventDetails(props) {
               <Form.Label>Parent?</Form.Label>
             </Col>
             <Col sm='2'>
-              <Form.Control
-                type='checkbox'
-                name='parent'
-                checked={input.parent}
-                onChange={(e) => setParent(e.target.checked)}
-              />
+              <Button
+                variant={input.parent ? "info" : "outline-info"}
+                value={input.parent}
+                onClick={(e) =>
+                  setInput({ ...input, ...initialInput, parent: !input.parent })
+                }>
+                {input.parent ? "Yep" : "Nope"}
+              </Button>
             </Col>
           </Form.Group>
           <Form.Group as={Row}>
