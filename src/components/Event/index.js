@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Button, ButtonGroup } from "react-bootstrap";
-import EditEvent from "./EditEvent";
+import EditEvent from "./EditEvent.js";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events/actions";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-import CalendarEvent from "../Event/CalenderEvent";
-import AddEvent from "../Event/AddEvent";
+import CalendarEvent from "../Event/CalenderEvent.js";
+import AddEvent from "../Event/AddEvent.js";
 
 export default function Day(props) {
   const today = format(new Date(), "yyyy-MM-dd");

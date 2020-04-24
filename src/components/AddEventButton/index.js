@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss";
-import AddEvent from "../Event/AddEvent";
+import AddEvent from "../Event/AddEvent.js";
 
 export default function AddEventButton(props) {
   const [modalShow, setModalShow] = useState(false);

@@ -10,7 +10,7 @@ import {
   getDay,
   addDays,
 } from "date-fns";
-import Day from "../../components/Calendar/Day";
+import Day from "../../components/Calendar/Day.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { selectEvents } from "../../store/events/selectors";

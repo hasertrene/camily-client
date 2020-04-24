@@ -3,8 +3,8 @@ import { Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { Form, Col, Button, Row } from "react-bootstrap";
-import AddMember from "../../components/Member/AddMember";
-import EditMember from "../../components/Member/EditMember";
+import AddMember from "../../components/Member/AddMember.js";
+import EditMember from "../../components/Member/EditMember.js";
 import {
   getUserWithStoredToken,
   deleteMember,

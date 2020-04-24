@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EditEvent from "./EditEvent";
+import EditEvent from "./EditEvent.js";
 
 export default function CalenderEvent(props) {
   const [modalShow, setModalShow] = useState(false);

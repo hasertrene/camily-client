@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
-import Event from "../../components/Event";
+import Event from "../../components/Event/index.js";
 import { format } from "date-fns";
 
 export default function Events() {

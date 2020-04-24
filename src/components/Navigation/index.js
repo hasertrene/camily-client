@@ -5,11 +5,11 @@ import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
-import NavbarItem from "./NavbarItem";
-import LoggedOut from "./LoggedOut";
+import NavbarItem from "./NavbarItem.js";
+import LoggedOut from "./LoggedOut.js";
 import { logOut } from "../../store/user/actions";
 import "./style.scss";
-import AddEventButton from "../AddEventButton";
+import AddEventButton from "../AddEventButton/index.js";
 
 export default function Navigation() {
   const dispatch = useDispatch();
