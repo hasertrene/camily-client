@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { patchMember } from "../../store/user/actions";
-import { selectUser } from "../../store/user/selectors";
 
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import "../../styles/style.scss";
@@ -10,33 +9,37 @@ import "../../styles/style.scss";
 export default function EventDetails(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector(selectUser);
   const member = props.member;
-
-  const [parent, setParent] = useState(member.parent);
-  const [firstName, setFirstName] = useState(member.firstName);
-  const [birthday, setBirthday] = useState(member.birthday);
-  const [colour, setColour] = useState(member.colour);
-  const [gender, setGender] = useState(member.gender);
-
-  let input = {
-    ...member,
+  const initialInput = {
     id: member.id,
-    firstName: firstName,
-    birthday: birthday,
-    gender: gender,
-    colour: colour,
-    parent: parent,
+    firstName: member.firstName,
+    birthday: member.birthday,
+    gender: member.gender,
+    colour: member.colour,
+    parent: member.parent,
   };
+  const [input, setInput] = useState(initialInput);
+  const [parent, setParent] = useState(member.parent);
 
-  console.log(input);
+  const inputHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInput({
+      ...input,
+      ...initialInput,
+      parent: parent,
+      [name]: value,
+    });
+  };
 
   const editMember = () => {
     dispatch(patchMember(input));
     props.onHide();
+    setInput(initialInput);
     history.push(history.location.pathname);
   };
 
+  console.log(input);
   return (
     <Modal
       {...props}
@@ -55,8 +58,8 @@ export default function EventDetails(props) {
             <Form.Control
               type='text'
               name='firstName'
-              defaultValue={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              defaultValue={member.firstName}
+              onChange={inputHandler}
               size='lg'
               required
             />
@@ -66,8 +69,8 @@ export default function EventDetails(props) {
             <Form.Control
               type='date'
               name='birthday'
-              defaultValue={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
+              defaultValue={member.birthday}
+              onChange={inputHandler}
               required
             />
           </Form.Group>
@@ -76,8 +79,8 @@ export default function EventDetails(props) {
             <Form.Control
               type='color'
               name='colour'
-              defaultValue={colour}
-              onChange={(e) => setColour(e.target.value)}
+              defaultValue={member.colour}
+              onChange={inputHandler}
               required
             />
           </Form.Group>
@@ -86,11 +89,12 @@ export default function EventDetails(props) {
               <Form.Label>Parent?</Form.Label>
             </Col>
             <Col sm='2'>
-              <Button
-                variant={parent ? "info" : "info-outline"}
-                onClick={() => setParent(!parent)}>
-                Yes
-              </Button>
+              <Form.Control
+                type='checkbox'
+                name='parent'
+                checked={input.parent}
+                onChange={(e) => setParent(e.target.checked)}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row}>
@@ -99,10 +103,10 @@ export default function EventDetails(props) {
             </Col>
             <Col sm='10'>
               <Form.Control
-                defaultValue={gender}
+                defaultValue={member.gender}
                 as='select'
                 name='gender'
-                onChange={(e) => setGender(e.target.value)}>
+                onChange={inputHandler}>
                 <option value='Female'>Female</option>
                 <option value='Male'>Male</option>
                 <option value='Other'>Other</option>

@@ -28,7 +28,7 @@ export default function Events() {
     });
 
   return (
-    <Container fluid='sm' className='main'>
+    <Container className='main'>
       <Row className='header'>
         <Col>Events</Col>
       </Row>

@@ -10,7 +10,6 @@ export default function Day(props) {
   const [modalShow, setModalShow] = useState(false);
 
   const clickHandler = (e) => {
-    console.log(e.target.tagName);
     if (e.target.className === "cell") {
       setModalShow(true);
     }
@@ -73,9 +72,6 @@ export default function Day(props) {
               />
             )
         )}
-        {/* <span onClick={() => setModalShow(true)} className='cell-btn'>
-          +
-        </span> */}
       </div>
       <AddEvent show={modalShow} onHide={() => setModalShow(false)} />
     </div>

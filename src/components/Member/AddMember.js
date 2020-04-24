@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { postMember } from "../../store/user/actions";
 
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
@@ -19,7 +19,7 @@ export default function EventDetails(props) {
   const inputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setInput({ ...input, [name]: value });
+    setInput({ ...input, parent: parent, [name]: value });
     console.log(input);
   };
 
@@ -81,11 +81,12 @@ export default function EventDetails(props) {
               <Form.Label>Parent?</Form.Label>
             </Col>
             <Col sm='2'>
-              <Button
-                variant={input.parent ? "info" : "outline-info"}
-                onClick={(e) => setInput({ ...input, parent: !input.parent })}>
-                {input.parent ? "Yep" : "Nope"}
-              </Button>{" "}
+              <Form.Control
+                type='checkbox'
+                name='parent'
+                checked={false}
+                onChange={(e) => setParent(e.target.checked)}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row}>

@@ -20,7 +20,15 @@ import { selectUser } from "../../store/user/selectors";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
 import "../../styles/style.scss";
-import { Button, Table, Container, Row, Col } from "react-bootstrap";
+import {
+  Button,
+  Table,
+  Container,
+  Row,
+  Col,
+  FormControl,
+  InputGroup,
+} from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
 
 export default function Calendar() {
@@ -61,6 +69,11 @@ export default function Calendar() {
       return;
     }
     history.push(`/${Number(params.year)}/${Number(params.month) - 1}`);
+  };
+  const changeYear = (e) => {
+    if (e.target.value.length === 4) {
+      history.push(`/${e.target.value}/${Number(params.month)}`);
+    }
   };
 
   let calendar = [];
@@ -122,7 +135,7 @@ export default function Calendar() {
   });
 
   return (
-    <Container fluid className='main'>
+    <Container className='main'>
       <Row className='header'>
         <Col>
           <Button size='lg' variant='info' onClick={() => previousMonth()}>
@@ -130,7 +143,34 @@ export default function Calendar() {
             &#8592;{" "}
           </Button>
         </Col>
-        <Col>{format(month, "MMMM yyyy")}</Col>
+        <Col md={{ span: 3 }}>
+          <InputGroup as={Col} size='lg'>
+            <FormControl
+              type='text'
+              className='yearInput'
+              readOnly
+              style={{
+                fontSize: "2rem",
+                color: "black",
+                border: "none",
+                backgroundColor: "white",
+              }}
+              // onChange={(e) => changeYear(e)}
+              defaultValue={format(month, "MMMM")}
+            />
+            <FormControl
+              type='number'
+              className='yearInput'
+              style={{
+                fontSize: "2rem",
+                color: "black",
+                border: "none",
+              }}
+              onChange={(e) => changeYear(e)}
+              defaultValue={format(month, "yyyy")}
+            />
+          </InputGroup>
+        </Col>
         <Col>
           <Button size='lg' variant='info' onClick={() => nextMonth()}>
             {" "}

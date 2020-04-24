@@ -21,6 +21,26 @@ $table-head: #5bc0de;
 }
 
 // Calendar
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.yearInput {
+  display: inline-block;
+  border: none;
+  outline: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+.yearInput:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+
 .table {
   margin: auto;
   max-width: 90%;
@@ -48,14 +68,6 @@ $table-head: #5bc0de;
       border: 1px solid rgba(68, 68, 68, 0.3);
       transition: all 0.3s ease;
       overflow: scroll;
-    }
-    .cell-btn {
-      font-size: 1.5rem;
-      opacity: 0.2;
-      cursor: pointer;
-    }
-    .cell-btn:hover {
-      opacity: 1;
     }
     .cell::-webkit-scrollbar {
       display: none;
