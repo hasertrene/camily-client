@@ -9,6 +9,16 @@ export default function Day(props) {
   const [details, showDetails] = useState(false);
   const [modalShow, setModalShow] = useState(false);
 
+  const clickHandler = (e) => {
+    console.log(e.target.tagName);
+    if (e.target.className === "cell") {
+      setModalShow(true);
+    }
+    if (e.target.className === "eventLink") {
+      return;
+    }
+  };
+
   let color;
   switch (props.dayOfTheWeek) {
     case 0:
@@ -47,6 +57,7 @@ export default function Day(props) {
             }
           : { backgroundColor: color }
       }
+      onClick={(e) => clickHandler(e)}
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
       {format(new Date(props.date), "d")}
@@ -62,9 +73,9 @@ export default function Day(props) {
               />
             )
         )}
-        <span onClick={() => setModalShow(true)} className='cell-btn'>
+        {/* <span onClick={() => setModalShow(true)} className='cell-btn'>
           +
-        </span>
+        </span> */}
       </div>
       <AddEvent show={modalShow} onHide={() => setModalShow(false)} />
     </div>

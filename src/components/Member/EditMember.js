@@ -12,35 +12,28 @@ export default function EventDetails(props) {
   const history = useHistory();
   const user = useSelector(selectUser);
   const member = props.member;
-  // const member = user.members.filter((member) => member === props.member);
-  const initialInput = {
+
+  const [parent, setParent] = useState(member.parent);
+  const [firstName, setFirstName] = useState(member.firstName);
+  const [birthday, setBirthday] = useState(member.birthday);
+  const [colour, setColour] = useState(member.colour);
+  const [gender, setGender] = useState(member.gender);
+
+  let input = {
+    ...member,
     id: member.id,
-    firstName: member.firstName,
-    birthday: member.birthday,
-    gender: member.gender,
-    colour: member.colour,
-    parent: member.parent,
+    firstName: firstName,
+    birthday: birthday,
+    gender: gender,
+    colour: colour,
+    parent: parent,
   };
 
-  const [input, setInput] = useState(initialInput);
-  // const [isChecked, setIsChecked] = useState(member.parent);
-
-  const inputHandler = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInput({
-      ...initialInput,
-      ...input,
-      [name]: value,
-    });
-  };
-
-  console.log(member);
+  console.log(input);
 
   const editMember = () => {
     dispatch(patchMember(input));
     props.onHide();
-    setInput(initialInput);
     history.push(history.location.pathname);
   };
 
@@ -62,8 +55,8 @@ export default function EventDetails(props) {
             <Form.Control
               type='text'
               name='firstName'
-              defaultValue={member.firstName}
-              onChange={inputHandler}
+              defaultValue={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               size='lg'
               required
             />
@@ -73,8 +66,8 @@ export default function EventDetails(props) {
             <Form.Control
               type='date'
               name='birthday'
-              defaultValue={member.birthday}
-              onChange={inputHandler}
+              defaultValue={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
               required
             />
           </Form.Group>
@@ -83,8 +76,8 @@ export default function EventDetails(props) {
             <Form.Control
               type='color'
               name='colour'
-              defaultValue={member.colour}
-              onChange={inputHandler}
+              defaultValue={colour}
+              onChange={(e) => setColour(e.target.value)}
               required
             />
           </Form.Group>
@@ -94,11 +87,9 @@ export default function EventDetails(props) {
             </Col>
             <Col sm='2'>
               <Button
-                variant={input.parent ? "info" : "outline-info"}
-                onClick={(e) =>
-                  setInput({ ...initialInput, ...input, parent: !input.parent })
-                }>
-                {input.parent ? "Yep" : "Nope"}
+                variant={parent ? "info" : "info-outline"}
+                onClick={() => setParent(!parent)}>
+                Yes
               </Button>
             </Col>
           </Form.Group>
@@ -108,10 +99,10 @@ export default function EventDetails(props) {
             </Col>
             <Col sm='10'>
               <Form.Control
-                defaultValue={member.gender}
+                defaultValue={gender}
                 as='select'
                 name='gender'
-                onChange={inputHandler}>
+                onChange={(e) => setGender(e.target.value)}>
                 <option value='Female'>Female</option>
                 <option value='Male'>Male</option>
                 <option value='Other'>Other</option>

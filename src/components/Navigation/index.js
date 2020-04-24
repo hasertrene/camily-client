@@ -22,7 +22,7 @@ export default function Navigation() {
         <Navbar.Brand as={NavLink} to='/'>
           <span className='logo'>Camily</span>
         </Navbar.Brand>
-        <AddEventButton />
+        {token && <AddEventButton />}{" "}
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav style={{ width: "100%" }} fill>
