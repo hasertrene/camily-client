@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./App.scss";
-import { getYear, getMonth } from "date-fns";
 
 import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
@@ -32,11 +31,6 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route
-          exact
-          path='/:year/:month'
-          component={token ? Calendar : Login}
-        />
         <Route exact path='/' component={token ? Calendar : Login} />
         <Route path='/events' component={token ? Events : Login} />
         <Route path='/family' component={token ? Family : Login} />
