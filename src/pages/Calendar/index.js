@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   format,
   eachDayOfInterval,
-  addMonths,
-  addYears,
   endOfMonth,
   startOfMonth,
   getWeek,
@@ -20,15 +18,7 @@ import { selectUser } from "../../store/user/selectors";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEvents } from "../../store/events/actions";
 import "../../styles/style.scss";
-import {
-  Button,
-  Table,
-  Container,
-  Row,
-  Col,
-  FormControl,
-  InputGroup,
-} from "react-bootstrap";
+import { Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
 
 export default function Calendar() {
@@ -46,7 +36,7 @@ export default function Calendar() {
   const startMonth = format(startOfMonth(month), "dd");
   const endMonth = format(endOfMonth(month), "dd");
   const firstDay = getDay(startOfMonth(month));
-
+  // eslint-disable-next-line
   const [locale, setLocale] = useState("en-US");
 
   const dispatch = useDispatch();
@@ -57,19 +47,20 @@ export default function Calendar() {
   }, [dispatch]);
 
   const nextMonth = () => {
-    if (params.month == 11) {
+    if (params.month === 11) {
       history.push(`/${Number(params.year) + 1}/0`);
       return;
     }
     history.push(`/${Number(params.year)}/${Number(params.month) + 1}`);
   };
   const previousMonth = () => {
-    if (params.month == 0) {
+    if (params.month === 0) {
       history.push(`/${Number(params.year) - 1}/11`);
       return;
     }
     history.push(`/${Number(params.year)}/${Number(params.month) - 1}`);
   };
+  // eslint-disable-next-line
   const changeYear = (e) => {
     if (e.target.value.length === 4) {
       history.push(`/${e.target.value}/${Number(params.month)}`);
@@ -137,27 +128,16 @@ export default function Calendar() {
   return (
     <Container className='main'>
       <Row className='header'>
-        <Col>
+        <Col md={{ span: 4 }}>
           <Button size='lg' variant='info' onClick={() => previousMonth()}>
             {" "}
             &#8592;{" "}
           </Button>
         </Col>
-        <Col md={{ span: 3 }}>
-          <InputGroup as={Col} size='lg'>
-            <FormControl
-              type='text'
-              className='yearInput'
-              readOnly
-              style={{
-                fontSize: "2rem",
-                color: "black",
-                border: "none",
-                backgroundColor: "white",
-              }}
-              // onChange={(e) => changeYear(e)}
-              defaultValue={format(month, "MMMM")}
-            />
+        <Col md={{ span: 2 }}>{format(month, "MMMM")}</Col>
+        <Col md={{ span: 2 }}>
+          {/* The year didn't update as I added the months */}
+          {/* <InputGroup as={Col} size='lg'>
             <FormControl
               type='number'
               className='yearInput'
@@ -165,13 +145,15 @@ export default function Calendar() {
                 fontSize: "2rem",
                 color: "black",
                 border: "none",
+                paddingBottom: "2.2vh",
               }}
               onChange={(e) => changeYear(e)}
               defaultValue={format(month, "yyyy")}
             />
-          </InputGroup>
+          </InputGroup> */}
+          {format(month, "yyyy")}
         </Col>
-        <Col>
+        <Col md={{ span: 4 }}>
           <Button size='lg' variant='info' onClick={() => nextMonth()}>
             {" "}
             &#8594;{" "}
@@ -180,7 +162,7 @@ export default function Calendar() {
       </Row>
       <Row>
         <Col>
-          <Table borderless size='sm' className='table'>
+          <Table size='sm' borderless className='table'>
             <thead>
               <tr>
                 <th>#</th>
@@ -197,7 +179,13 @@ export default function Calendar() {
               <tbody key={index}>
                 <tr>
                   {week.map((day, index) => (
-                    <td key={index} style={day.date ? {} : { opacity: "0" }}>
+                    <td
+                      key={index}
+                      style={
+                        day.date
+                          ? { padding: "4px 5px" }
+                          : { opacity: "0", padding: "4px 5px" }
+                      }>
                       {day.number ? (
                         <div
                           style={{

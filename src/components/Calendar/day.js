@@ -73,7 +73,11 @@ export default function Day(props) {
             )
         )}
       </div>
-      <AddEvent show={modalShow} onHide={() => setModalShow(false)} />
+      <AddEvent
+        date={props.date}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 }

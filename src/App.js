@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import "./App.scss";
-import { getYear, getMonth } from "date-fns";
-
 import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";

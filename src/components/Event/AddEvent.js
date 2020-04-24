@@ -11,7 +11,7 @@ export default function AddEvent(props) {
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
   const dispatch = useDispatch();
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({ date: props.date });
   const [wholeDay, setWholeDay] = useState(input.time);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export default function AddEvent(props) {
     props.onHide();
     setInput({});
   };
+
   return (
     <Modal
       {...props}
@@ -67,7 +68,7 @@ export default function AddEvent(props) {
             <Form.Control
               type='date'
               name='date'
-              value={input.date}
+              value={props.date ? props.date : input.date}
               onChange={inputHandler}
             />
           </Form.Group>

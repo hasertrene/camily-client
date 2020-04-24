@@ -23,7 +23,7 @@ export default function Event(props) {
     <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}
       <Row>
-        <Col>
+        <Col md={{ span: 1 }}>
           <span
             style={{
               border: `2px solid ${colour}`,
@@ -33,7 +33,10 @@ export default function Event(props) {
             {props.date.split("-")[2]}
           </span>{" "}
         </Col>
-        <Col className='eventClick' onClick={() => setModalShow(true)}>
+        <Col
+          md={{ span: 3 }}
+          className='eventClick'
+          onClick={() => setModalShow(true)}>
           <strong>{props.title}</strong>
         </Col>{" "}
         <Col className='eventClick' onClick={() => setModalShow(true)}>

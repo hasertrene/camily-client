@@ -112,6 +112,7 @@ export const deleteEvent = (id) => {
     const token = selectToken(getState());
     dispatch(appLoading());
     try {
+      // eslint-disable-next-line
       const response = await axios.delete(`${apiUrl}/events/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });

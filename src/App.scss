@@ -2,11 +2,7 @@
 
 $base-color: white;
 
-html {
-  background-color: $base-color;
-  z-index: -1;
-}
-
+html,
 body {
   background-color: $base-color;
   z-index: -1;

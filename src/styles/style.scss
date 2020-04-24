@@ -5,8 +5,8 @@ $calendar-hover: rgb(255, 153, 0);
 $table-head: #5bc0de;
 
 .main {
-  margin-bottom: 100px;
   background-color: $base-color;
+  margin-bottom: 80px;
 }
 .header {
   text-align: center;
@@ -42,8 +42,8 @@ input::-webkit-inner-spin-button {
 }
 
 .table {
-  margin: auto;
-  max-width: 90%;
+  max-width: 85%;
+  margin: 0 auto 150px;
   thead {
     background-color: $table-head;
     box-shadow: $shadow;
@@ -55,15 +55,11 @@ input::-webkit-inner-spin-button {
     }
   }
   tbody {
-    td {
-      padding: 1vh;
-      width: 15vh;
-    }
     .cell {
       font-weight: bold;
       box-shadow: $shadow;
       padding: 1.2vh 0 1vh 1.2vh;
-      height: 15vh;
+      height: 14vh;
       border-radius: 10px;
       border: 1px solid rgba(68, 68, 68, 0.3);
       transition: all 0.3s ease;
