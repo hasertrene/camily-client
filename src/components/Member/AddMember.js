@@ -19,7 +19,7 @@ export default function EventDetails(props) {
   const inputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setInput({ ...input, parent: parent, [name]: value });
+    setInput({ ...input, [name]: value });
     console.log(input);
   };
 
@@ -81,12 +81,11 @@ export default function EventDetails(props) {
               <Form.Label>Parent?</Form.Label>
             </Col>
             <Col sm='2'>
-              <Form.Control
-                type='checkbox'
-                name='parent'
-                checked={false}
-                onChange={(e) => setParent(e.target.checked)}
-              />
+              <Button
+                variant={input.parent ? "info" : "outline-info"}
+                onClick={(e) => setInput({ ...input, parent: !input.parent })}>
+                {input.parent ? "Yep" : "Nope"}
+              </Button>{" "}
             </Col>
           </Form.Group>
           <Form.Group as={Row}>

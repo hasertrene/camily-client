@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { patchMember } from "../../store/user/actions";
+import { selectUser } from "../../store/user/selectors";
 
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import "../../styles/style.scss";
@@ -9,7 +10,9 @@ import "../../styles/style.scss";
 export default function EventDetails(props) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector(selectUser);
   const member = props.member;
+  // const member = user.members.filter((member) => member === props.member);
   const initialInput = {
     id: member.id,
     firstName: member.firstName,
@@ -18,6 +21,7 @@ export default function EventDetails(props) {
     colour: member.colour,
     parent: member.parent,
   };
+
   const [input, setInput] = useState(initialInput);
   // const [isChecked, setIsChecked] = useState(member.parent);
 
@@ -25,13 +29,13 @@ export default function EventDetails(props) {
     const name = e.target.name;
     const value = e.target.value;
     setInput({
-      ...input,
       ...initialInput,
+      ...input,
       [name]: value,
     });
   };
 
-  console.log(input);
+  console.log(member);
 
   const editMember = () => {
     dispatch(patchMember(input));
@@ -40,7 +44,6 @@ export default function EventDetails(props) {
     history.push(history.location.pathname);
   };
 
-  console.log(member.parent);
   return (
     <Modal
       {...props}
@@ -92,9 +95,8 @@ export default function EventDetails(props) {
             <Col sm='2'>
               <Button
                 variant={input.parent ? "info" : "outline-info"}
-                value={input.parent}
                 onClick={(e) =>
-                  setInput({ ...input, ...initialInput, parent: !input.parent })
+                  setInput({ ...initialInput, ...input, parent: !input.parent })
                 }>
                 {input.parent ? "Yep" : "Nope"}
               </Button>
