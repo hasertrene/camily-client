@@ -47,14 +47,14 @@ export default function Calendar() {
   }, [dispatch]);
 
   const nextMonth = () => {
-    if (params.month === 11) {
+    if (params.month === "11") {
       history.push(`/${Number(params.year) + 1}/0`);
       return;
     }
     history.push(`/${Number(params.year)}/${Number(params.month) + 1}`);
   };
   const previousMonth = () => {
-    if (params.month === 0) {
+    if (params.month === "0") {
       history.push(`/${Number(params.year) - 1}/11`);
       return;
     }
