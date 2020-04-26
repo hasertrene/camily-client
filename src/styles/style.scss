@@ -51,10 +51,19 @@ input::-webkit-inner-spin-button {
       text-align: center;
       padding: 1vh;
       height: 5vh;
-      min-width: 15vh;
+      min-width: 8vw;
     }
   }
   tbody {
+    td {
+      max-width: 8vw;
+      padding: 3px 5px;
+    }
+    .cell-wkno {
+      font-size: 10vh;
+      color: #00000033;
+      justify-content: justify;
+    }
     .cell {
       font-weight: bold;
       box-shadow: $shadow;

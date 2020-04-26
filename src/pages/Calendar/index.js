@@ -179,22 +179,9 @@ export default function Calendar() {
               <tbody key={index}>
                 <tr>
                   {week.map((day, index) => (
-                    <td
-                      key={index}
-                      style={
-                        day.date
-                          ? { padding: "4px 5px" }
-                          : { opacity: "0", padding: "4px 5px" }
-                      }>
+                    <td key={index} style={day.date ? {} : { opacity: "0" }}>
                       {day.number ? (
-                        <div
-                          style={{
-                            fontSize: "10vh",
-                            color: "#00000033",
-                            justifyContent: "justify",
-                          }}>
-                          {day.number}
-                        </div>
+                        <div className='cell-wkno'>{day.number}</div>
                       ) : (
                         <Day {...day} events={events} user={user} />
                       )}

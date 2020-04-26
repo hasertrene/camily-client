@@ -32,7 +32,7 @@ export default function AddEvent(props) {
   const addEvent = () => {
     dispatch(postEvent(input));
     props.onHide();
-    setInput({});
+    setInput({ date: props.date });
   };
 
   return (
@@ -50,7 +50,7 @@ export default function AddEvent(props) {
             <Form.Control
               type='text'
               name='title'
-              value={input.title}
+              // value={input.title}
               onChange={inputHandler}
               size='lg'
             />
@@ -60,7 +60,7 @@ export default function AddEvent(props) {
               as='textarea'
               rows='3'
               name='description'
-              value={input.description}
+              // value={input.description}
               onChange={inputHandler}
             />
           </Form.Group>
@@ -108,6 +108,7 @@ export default function AddEvent(props) {
                 as='select'
                 name='activityId'
                 onChange={inputHandler}>
+                <option value={null}></option>
                 {acts &&
                   acts.map((act) => (
                     <option key={act.id} value={act.id}>
@@ -125,7 +126,12 @@ export default function AddEvent(props) {
               <Form.Control as='select' name='memberId' onChange={inputHandler}>
                 {user.members &&
                   user.members.map((member) => (
-                    <option key={member.id} value={member.id}>
+                    <option
+                      key={member.id}
+                      value={member.id}
+                      defaultValue={
+                        member.firstName === "Everybody" ? true : false
+                      }>
                       {member.firstName}
                     </option>
                   ))}
