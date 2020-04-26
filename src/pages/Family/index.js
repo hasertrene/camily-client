@@ -76,37 +76,39 @@ export default function Family() {
           }}>
           <h4>Family members</h4>
           <hr />
-          {user.members.map((member) => (
-            <Row key={member.id} style={{ margin: "5px 0" }}>
-              <Col>
-                <span style={{ fontSize: "1.1rem" }}>{member.firstName}</span>
-              </Col>
-              <Col md={{ span: 1 }}>
-                <span
-                  style={{
-                    color: member.colour,
-                  }}>
-                  &#9632;
-                </span>
-              </Col>
-              <Col md={{ span: 1 }}>
-                <Button
-                  variant='outline-info'
-                  onClick={() => {
-                    handleEdit(member);
-                  }}>
-                  Edit
-                </Button>
-              </Col>{" "}
-              <Col md={{ offset: 1 }}>
-                <Button
-                  variant='outline-info'
-                  onClick={() => handleDelete(member.id)}>
-                  Delete
-                </Button>
-              </Col>{" "}
-            </Row>
-          ))}
+          {user.members
+            .filter((member) => member.firstName !== "Everybody")
+            .map((member) => (
+              <Row key={member.id} style={{ margin: "5px 0" }}>
+                <Col>
+                  <span style={{ fontSize: "1.1rem" }}>{member.firstName}</span>
+                </Col>
+                <Col md={{ span: 1 }}>
+                  <span
+                    style={{
+                      color: member.colour,
+                    }}>
+                    &#9632;
+                  </span>
+                </Col>
+                <Col md={{ span: 1 }}>
+                  <Button
+                    variant='outline-info'
+                    onClick={() => {
+                      handleEdit(member);
+                    }}>
+                    Edit
+                  </Button>
+                </Col>{" "}
+                <Col md={{ offset: 1 }}>
+                  <Button
+                    variant='outline-info'
+                    onClick={() => handleDelete(member.id)}>
+                    Delete
+                  </Button>
+                </Col>{" "}
+              </Row>
+            ))}
           <Row>
             <Col>
               <Button variant='info' onClick={() => setModalShow(true)}>
