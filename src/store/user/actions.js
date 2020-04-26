@@ -239,7 +239,6 @@ export const deleteMember = (id) => {
       const response = await axios.delete(`${apiUrl}/me/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       dispatch(deleteMemberSuccess(response.data));
       dispatch(appDoneLoading());
     } catch (error) {

@@ -10,24 +10,23 @@ export default function EventDetails(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const member = props.member;
-  const initialInput = {
-    id: member.id,
-    firstName: member.firstName,
-    birthday: member.birthday,
-    gender: member.gender,
-    colour: member.colour,
-    parent: member.parent,
-  };
-  const [input, setInput] = useState(initialInput);
-  const [parent, setParent] = useState(member.parent);
+
+  const [input, setInput] = useState({});
 
   const inputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    const initialInput = {
+      id: member.id,
+      firstName: member.firstName,
+      birthday: member.birthday,
+      gender: member.gender,
+      colour: member.colour,
+      parent: member.parent,
+    };
     setInput({
       ...input,
       ...initialInput,
-      parent: parent,
       [name]: value,
     });
   };
@@ -35,11 +34,11 @@ export default function EventDetails(props) {
   const editMember = () => {
     dispatch(patchMember(input));
     props.onHide();
-    setInput(initialInput);
+    setInput({});
     history.push(history.location.pathname);
   };
 
-  console.log(input);
+  console.log(input, member.parent);
   return (
     <Modal
       {...props}
@@ -89,11 +88,21 @@ export default function EventDetails(props) {
               <Form.Label>Parent?</Form.Label>
             </Col>
             <Col sm='2'>
-              <Form.Control
-                type='checkbox'
+              <Form.Check
+                type='radio'
                 name='parent'
-                checked={input.parent}
-                onChange={(e) => setParent(e.target.checked)}
+                label='Yes'
+                value='true'
+                defaultChecked={member.parent ? true : false}
+                onChange={inputHandler}
+              />
+              <Form.Check
+                type='radio'
+                label='Nope'
+                name='parent'
+                value='false'
+                defaultChecked={member.parent ? false : true}
+                onChange={inputHandler}
               />
             </Col>
           </Form.Group>

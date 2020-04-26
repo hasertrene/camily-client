@@ -7,20 +7,18 @@ import "../../styles/style.scss";
 
 export default function EventDetails(props) {
   const dispatch = useDispatch();
-  const [parent, setParent] = useState(false);
   const [input, setInput] = useState({
     firstName: "",
     birthday: "",
     colour: "#b500ba",
-    parent: false,
+    parent: "",
     gender: "Female",
   });
 
   const inputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setInput({ ...input, parent: parent, [name]: value });
-    console.log(input);
+    setInput({ ...input, [name]: value });
   };
 
   const addMember = () => {
@@ -30,10 +28,12 @@ export default function EventDetails(props) {
       firstName: "",
       birthday: "",
       colour: "#b500ba",
-      parent: false,
+      parent: "",
       gender: "Female",
     });
   };
+
+  console.log(input);
   return (
     <Modal
       {...props}
@@ -81,11 +81,19 @@ export default function EventDetails(props) {
               <Form.Label>Parent?</Form.Label>
             </Col>
             <Col sm='2'>
-              <Form.Control
-                type='checkbox'
+              <Form.Check
+                type='radio'
                 name='parent'
-                checked={false}
-                onChange={(e) => setParent(e.target.checked)}
+                label='Yes'
+                value='true'
+                onChange={inputHandler}
+              />
+              <Form.Check
+                type='radio'
+                label='Nope'
+                name='parent'
+                value='false'
+                onChange={inputHandler}
               />
             </Col>
           </Form.Group>

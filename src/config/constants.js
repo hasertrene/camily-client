@@ -1,3 +1,3 @@
 export const apiUrl =
-  "https://camily-server.herokuapp.com" || "http://localhost:4000";
+  "http://localhost:4000" || "https://camily-server.herokuapp.com";
 export const DEFAULT_MESSAGE_TIMEOUT = 3000;
