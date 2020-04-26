@@ -123,7 +123,6 @@ export default function AddEvent(props) {
             </Col>
             <Col sm='10'>
               <Form.Control as='select' name='memberId' onChange={inputHandler}>
-                <option value='null'>Everybody</option>
                 {user.members &&
                   user.members.map((member) => (
                     <option key={member.id} value={member.id}>
