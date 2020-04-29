@@ -38,7 +38,6 @@ export default function EventDetails(props) {
     history.push(history.location.pathname);
   };
 
-  console.log(input, member.parent);
   return (
     <Modal
       {...props}

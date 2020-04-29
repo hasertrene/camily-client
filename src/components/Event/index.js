@@ -14,7 +14,7 @@ export default function Event(props) {
   const handleDelete = (id) => {
     window.confirm(`Are you sure you want to delete: ${props.title}?`)
       ? dispatch(deleteEvent(id))
-      : console.log("Toch niet");
+      : console.log("Canceled");
   };
 
   return (

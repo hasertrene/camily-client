@@ -33,7 +33,6 @@ export default function EventDetails(props) {
     });
   };
 
-  console.log(input);
   return (
     <Modal
       {...props}

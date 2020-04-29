@@ -65,6 +65,9 @@ export const updateUser = (email, password, name) => {
         }
       );
       dispatch(updateUserSuccess(response.data));
+      dispatch(
+        showMessageWithTimeout("success", true, "Account updated successfully!")
+      );
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

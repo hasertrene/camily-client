@@ -44,7 +44,7 @@ export default function Calendar() {
 
   useEffect(() => {
     dispatch(fetchEventsByMonth(params));
-  }, [dispatch]);
+  }, [history.location.key, dispatch]);
 
   const nextMonth = () => {
     if (params.month === "11") {

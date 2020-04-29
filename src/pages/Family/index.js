@@ -36,8 +36,10 @@ export default function Family() {
     }
     dispatch(updateUser(submitEmail, password, submitName));
   };
-  const handleDelete = (id) => {
-    dispatch(deleteMember(id));
+  const handleDelete = (member) => {
+    window.confirm(`Are you sure you want to delete ${member.firstName}?`)
+      ? dispatch(deleteMember(member.id))
+      : console.log("Canceled");
   };
   const handleEdit = (member) => {
     setMember(member);
@@ -103,7 +105,7 @@ export default function Family() {
                 <Col md={{ offset: 1 }}>
                   <Button
                     variant='outline-info'
-                    onClick={() => handleDelete(member.id)}>
+                    onClick={() => handleDelete(member)}>
                     Delete
                   </Button>
                 </Col>{" "}

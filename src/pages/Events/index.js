@@ -21,7 +21,7 @@ export default function Events() {
 
   useEffect(() => {
     dispatch(fetchEventsByYear(params.year));
-  }, [dispatch]);
+  }, [history.location.key, dispatch]);
 
   // Gather events per month: [m]
   let groups = events.reduce(function (acc, event) {
