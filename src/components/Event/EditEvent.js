@@ -27,10 +27,6 @@ export default function EditEvent(props) {
   });
   const [wholeDay, setWholeDay] = useState(input.time);
 
-  useEffect(() => {
-    dispatch(fetchEvents());
-  }, [history.location.key, dispatch]);
-
   const inputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;

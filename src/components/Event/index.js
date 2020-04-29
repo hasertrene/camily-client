@@ -17,8 +17,6 @@ export default function Event(props) {
       : console.log("Toch niet");
   };
 
-  useEffect(() => {}, [dispatch]);
-
   return (
     <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}
@@ -46,7 +44,7 @@ export default function Event(props) {
           {activity ? activity.type : ""}
         </Col>{" "}
         <Col className='eventClick' onClick={() => setModalShow(true)}>
-          <strong>{member ? member.firstName : "Everybody"}</strong>
+          <strong>{member ? member.firstName : ""}</strong>
         </Col>{" "}
         <Col>
           <ButtonGroup>

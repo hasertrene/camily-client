@@ -92,6 +92,7 @@ export const updateEvent = (id, input) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      console.log(response.data.event);
       dispatch(updateEventSuccess(response.data.event));
       dispatch(appDoneLoading());
     } catch (error) {
@@ -138,6 +139,53 @@ export const fetchEvents = () => {
     dispatch(appLoading());
     try {
       const response = await axios.get(`${apiUrl}/events`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(fetchEventsSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const fetchEventsByMonth = (params) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const { year, month } = params;
+    dispatch(appLoading());
+    try {
+      const response = await axios.get(`${apiUrl}/events/${year}/${month}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(fetchEventsSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const fetchEventsByYear = (year) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    dispatch(appLoading());
+    try {
+      const response = await axios.get(`${apiUrl}/events/${year}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(fetchEventsSuccess(response.data));

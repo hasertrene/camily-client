@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectActs } from "../../store/events/selectors";
 import { selectUser } from "../../store/user/selectors";
-import { fetchEvents } from "../../store/events/actions";
 import { postEvent } from "../../store/events/actions";
 
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
@@ -13,10 +12,6 @@ export default function AddEvent(props) {
   const dispatch = useDispatch();
   const [input, setInput] = useState({ date: props.date });
   const [wholeDay, setWholeDay] = useState(input.time);
-
-  useEffect(() => {
-    dispatch(fetchEvents());
-  }, [dispatch]);
 
   const inputHandler = (e) => {
     const name = e.target.name;

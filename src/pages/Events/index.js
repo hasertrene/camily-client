@@ -2,16 +2,25 @@ import React, { useEffect } from "react";
 import { Container, Row, Col, Card, Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
-import { fetchEvents } from "../../store/events/actions";
+import { fetchEventsByYear } from "../../store/events/actions";
+import { useParams, useHistory } from "react-router-dom";
 import Event from "../../components/Event/index.js";
-import { format } from "date-fns";
+import { format, getYear } from "date-fns";
 
 export default function Events() {
   const dispatch = useDispatch();
   const events = useSelector(selectEvents);
+  const date = { year: getYear(new Date()) };
+  const getParams = useParams();
+  const history = useHistory();
+  const params =
+    history.location.pathname === "/events/" ||
+    history.location.pathname === "/events"
+      ? date
+      : { year: getParams.year };
 
   useEffect(() => {
-    dispatch(fetchEvents());
+    dispatch(fetchEventsByYear(params.year));
   }, [dispatch]);
 
   // Gather events per month: [m]
@@ -30,7 +39,7 @@ export default function Events() {
   return (
     <Container className='main'>
       <Row className='header'>
-        <Col>Events</Col>
+        <Col>Events {params.year}</Col>
       </Row>
       <Row>
         <Col>
