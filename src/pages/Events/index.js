@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Card, Accordion } from "react-bootstrap";
+import { Container, Row, Col, Card, Accordion, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEvents } from "../../store/events/selectors";
 import { fetchEventsByYear } from "../../store/events/actions";
@@ -36,10 +36,31 @@ export default function Events() {
       return groups[k];
     });
 
+  const nextYear = () => {
+    history.push(`/events/${Number(params.year) + 1}`);
+  };
+
+  const previousYear = () => {
+    history.push(`/events/${Number(params.year) - 1}`);
+  };
+
   return (
     <Container className='main'>
       <Row className='header'>
-        <Col>Events {params.year}</Col>
+        <Col md={{ span: 4 }}>
+          <Button size='lg' variant='info' onClick={() => previousYear()}>
+            {" "}
+            &#8592;{" "}
+          </Button>
+        </Col>
+        <Col md={{ span: 2 }}>Events </Col>
+        <Col md={{ span: 2 }}>{params.year}</Col>
+        <Col md={{ span: 4 }}>
+          <Button size='lg' variant='info' onClick={() => nextYear()}>
+            {" "}
+            &#8594;{" "}
+          </Button>
+        </Col>
       </Row>
       <Row>
         <Col>
