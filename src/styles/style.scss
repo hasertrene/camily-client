@@ -3,6 +3,8 @@ $day-highlight: #d9534f;
 $shadow: 2px 2px 1px rgba(68, 68, 68, 0.3);
 $calendar-hover: rgb(255, 153, 0);
 $table-head: #5bc0de;
+$cell-width: 7vw;
+$cell-height: 7.5vw;
 
 .main {
   background-color: $base-color;
@@ -10,18 +12,19 @@ $table-head: #5bc0de;
 }
 .header {
   text-align: center;
-  font-size: 2rem;
+  font-size: 4vw;
   padding: 1vh;
   background-color: $base-color;
 }
 
 //Events
 .eventClick {
+  margin: 1vh 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
 // Calendar
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -42,33 +45,35 @@ input::-webkit-inner-spin-button {
 }
 
 .table {
-  max-width: 85%;
   margin: 0 auto 150px;
   thead {
     background-color: $table-head;
     box-shadow: $shadow;
     th {
+      font-size: 1.1vw;
       text-align: center;
       padding: 1vh;
-      height: 5vh;
-      min-width: 10vw;
+      height: 2vh;
+      min-width: $cell-width;
     }
   }
   tbody {
     td {
-      max-width: 8vw;
-      padding: 3px 5px;
+      max-width: $cell-width;
+      padding: 3px;
     }
     .cell-wkno {
-      font-size: 10vh;
+      font-size: 5vw;
       color: #00000033;
-      justify-content: justify;
+      // justify-content: justify;
+      min-width: 100%;
     }
     .cell {
+      font-size: 1.5vw;
       font-weight: bold;
       box-shadow: $shadow;
       padding: 1.2vh 0 1vh 1.2vh;
-      height: 14vh;
+      height: $cell-height;
       border-radius: 10px;
       border: 1px solid rgba(68, 68, 68, 0.3);
       transition: all 0.3s ease;
@@ -84,7 +89,7 @@ input::-webkit-inner-spin-button {
       border-radius: 10px;
     }
     .calEvents {
-      font-size: 15px;
+      font-size: 1.5vw;
       line-height: 0.7rem;
     }
     .block {
@@ -96,7 +101,7 @@ input::-webkit-inner-spin-button {
       border-radius: 10px;
     }
     .block:hover {
-      width: 8vw;
+      width: 90%;
       transition: all 0.2s ease;
     }
   }

@@ -45,17 +45,17 @@ export default function Events() {
   };
 
   return (
-    <Container className='main'>
+    <Container fluid='lg' className='main'>
       <Row className='header'>
-        <Col md={{ span: 4 }}>
+        <Col>
           <Button size='lg' variant='info' onClick={() => previousYear()}>
-            {" "}
-            &#8592;{" "}
+            {"  "}
+            &#8592;{"  "}
           </Button>
         </Col>
-        <Col md={{ span: 2 }}>Events </Col>
-        <Col md={{ span: 2 }}>{params.year}</Col>
-        <Col md={{ span: 4 }}>
+        <Col>Events </Col>
+        <Col>{params.year}</Col>
+        <Col>
           <Button size='lg' variant='info' onClick={() => nextYear()}>
             {" "}
             &#8594;{" "}

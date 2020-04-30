@@ -10,6 +10,7 @@ export default function CalenderEvent(props) {
     <div key={event.id}>
       <OverlayTrigger
         placement='left'
+        delay={{ show: 300, hide: 250 }}
         overlay={
           <Tooltip id='tooltip-left'>
             {props.details && <span className='eventLink'>{event.title}</span>}

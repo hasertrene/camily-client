@@ -3,6 +3,7 @@ import { Card, Row, Col, Button, ButtonGroup } from "react-bootstrap";
 import EditEvent from "./EditEvent.js";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events/actions";
+import { useMediaQuery } from "react-responsive";
 
 export default function Event(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -10,9 +11,10 @@ export default function Event(props) {
   const member = props.member;
   const activity = props.activity;
   const colour = member ? member.colour : "#555555";
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const handleDelete = (id) => {
-    window.confirm(`Are you sure you want to delete: ${props.title}?`)
+    window.confirm(`Are you sure you want to delete ${props.title}?`)
       ? dispatch(deleteEvent(id))
       : console.log("Canceled");
   };
@@ -20,7 +22,7 @@ export default function Event(props) {
     <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}
       <Row>
-        <Col md={{ span: 1 }}>
+        <Col>
           <span
             style={{
               border: `2px solid ${colour}`,
@@ -30,10 +32,7 @@ export default function Event(props) {
             {props.date.split("-")[2]}
           </span>{" "}
         </Col>
-        <Col
-          md={{ span: 3 }}
-          className='eventClick'
-          onClick={() => setModalShow(true)}>
+        <Col className='eventClick' onClick={() => setModalShow(true)}>
           <strong>{props.title}</strong>
         </Col>{" "}
         <Col className='eventClick' onClick={() => setModalShow(true)}>

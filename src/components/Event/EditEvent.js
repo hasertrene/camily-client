@@ -42,8 +42,7 @@ export default function EditEvent(props) {
 
   const handleDelete = (id) => {
     if (
-      window.confirm(`Are you sure you want to delete: ${event.title}?`) ===
-      true
+      window.confirm(`Are you sure you want to delete ${event.title}?`) === true
     ) {
       dispatch(deleteEvent(id));
       props.onHide();

@@ -20,6 +20,7 @@ import { fetchEventsByMonth } from "../../store/events/actions";
 import "../../styles/style.scss";
 import { Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 export default function Calendar() {
   const date = { year: getYear(new Date()), month: getMonth(new Date()) };
@@ -38,6 +39,7 @@ export default function Calendar() {
   const firstDay = getDay(startOfMonth(month));
   // eslint-disable-next-line
   const [locale, setLocale] = useState("en-US");
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const dispatch = useDispatch();
   const events = useSelector(selectEvents);
@@ -126,16 +128,16 @@ export default function Calendar() {
   });
 
   return (
-    <Container className='main'>
+    <Container fluid='lg' className='main'>
       <Row className='header'>
-        <Col md={{ span: 4 }}>
+        <Col>
           <Button size='lg' variant='info' onClick={() => previousMonth()}>
             {" "}
             &#8592;{" "}
           </Button>
         </Col>
-        <Col md={{ span: 2 }}>{format(month, "MMMM")}</Col>
-        <Col md={{ span: 2 }}>
+        <Col>{format(month, "MMMM")}</Col>
+        <Col>
           {/* The year didn't update as I added the months */}
           {/* <InputGroup as={Col} size='lg'>
             <FormControl
@@ -153,7 +155,7 @@ export default function Calendar() {
           </InputGroup> */}
           {format(month, "yyyy")}
         </Col>
-        <Col md={{ span: 4 }}>
+        <Col>
           <Button size='lg' variant='info' onClick={() => nextMonth()}>
             {" "}
             &#8594;{" "}
@@ -169,7 +171,7 @@ export default function Calendar() {
                 {daysOfTheWeek.map((day, index) => (
                   <th key={index}>
                     {new Intl.DateTimeFormat(locale, {
-                      weekday: "long",
+                      weekday: `${isTabletOrMobile ? "short" : "long"}`,
                     }).format(day)}
                   </th>
                 ))}
