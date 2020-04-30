@@ -20,9 +20,7 @@ export default function CalenderEvent(props) {
           className='block'
           style={{
             backgroundColor: `${event.member && event.member.colour}`,
-          }}>
-          {/* {props.details && <span className='eventLink'>{event.title}</span>} */}
-        </span>
+          }}></span>
       </OverlayTrigger>
       <EditEvent
         remove='true'
