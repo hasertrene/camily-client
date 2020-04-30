@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EditEvent from "./EditEvent.js";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function CalenderEvent(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -7,15 +8,22 @@ export default function CalenderEvent(props) {
 
   return (
     <div key={event.id}>
-      <span
-        style={{
-          color: `${event.member && event.member.colour}`,
-        }}>
-        &#9632;
-      </span>
-      <span className='eventTitle' onClick={() => setModalShow(true)}>
-        {props.details && <span className='eventLink'>{event.title}</span>}
-      </span>
+      <OverlayTrigger
+        placement='left'
+        overlay={
+          <Tooltip id='tooltip-left'>
+            {props.details && <span className='eventLink'>{event.title}</span>}
+          </Tooltip>
+        }>
+        <span
+          onClick={() => setModalShow(true)}
+          className='block'
+          style={{
+            backgroundColor: `${event.member && event.member.colour}`,
+          }}>
+          {/* {props.details && <span className='eventLink'>{event.title}</span>} */}
+        </span>
+      </OverlayTrigger>
       <EditEvent
         remove='true'
         show={modalShow}

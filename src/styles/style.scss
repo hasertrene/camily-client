@@ -87,14 +87,17 @@ input::-webkit-inner-spin-button {
       font-size: 15px;
       line-height: 0.7rem;
     }
-    .eventTitle {
-      font-size: 0.6rem;
-      color: black;
-      font-weight: 400;
+    .block {
+      display: inline-block;
+      height: 10px;
+      width: 15px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 10px;
     }
-    .eventLink:hover {
-      text-decoration: underline;
+    .block:hover {
+      width: 7vw;
+      transition: all 0.2s ease;
     }
   }
 }

@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectActs } from "../../store/events/selectors";
 import { selectUser } from "../../store/user/selectors";
 import { useHistory } from "react-router-dom";
-import {
-  updateEvent,
-  deleteEvent,
-  fetchEvents,
-} from "../../store/events/actions";
+import { updateEvent, deleteEvent } from "../../store/events/actions";
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import "../../styles/style.scss";
 
@@ -46,7 +42,7 @@ export default function EditEvent(props) {
 
   const handleDelete = (id) => {
     if (
-      window.confirm(`Are you sure you want to delete: ${props.title}?`) ===
+      window.confirm(`Are you sure you want to delete: ${event.title}?`) ===
       true
     ) {
       dispatch(deleteEvent(id));
