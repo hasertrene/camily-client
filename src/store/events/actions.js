@@ -7,6 +7,7 @@ export const FETCH_EVENTS_SUCCESS = "FETCH_EVENTS_SUCCESS";
 export const EVENT_UPDATED = "EVENT_UPDATED";
 export const EVENT_POSTED = "EVENT_POSTED";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
+export const FETCH_BIRTHDAYS_SUCCESS = "FETCH_BIRTHDAYS_SUCCESS";
 
 const updateEventSuccess = (event) => {
   return {
@@ -33,6 +34,13 @@ const fetchEventsSuccess = (events) => {
   return {
     type: FETCH_EVENTS_SUCCESS,
     payload: events,
+  };
+};
+
+const fetchBirthdaysSuccess = (birthdays) => {
+  return {
+    type: FETCH_BIRTHDAYS_SUCCESS,
+    payload: birthdays,
   };
 };
 
@@ -189,6 +197,30 @@ export const fetchEventsByYear = (year) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(fetchEventsSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const fetchBirthdays = (month) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    dispatch(appLoading());
+    try {
+      const response = await axios.get(`${apiUrl}/events/birthdays/${month}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(response.data.birthdays);
+      dispatch(fetchBirthdaysSuccess(response.data.birthdays));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

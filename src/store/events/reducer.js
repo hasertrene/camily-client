@@ -3,14 +3,18 @@ import {
   DELETE_SUCCESS,
   EVENT_UPDATED,
   EVENT_POSTED,
+  FETCH_BIRTHDAYS_SUCCESS,
 } from "./actions";
 
-const initialState = { events: [], activities: [] };
+const initialState = { events: [], activities: [], birthdays: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_EVENTS_SUCCESS:
       return { ...action.payload };
+
+    case FETCH_BIRTHDAYS_SUCCESS:
+      return { ...state, birthdays: [action.payload] };
 
     case EVENT_UPDATED:
       const newList = state.events.filter((e) => e.id !== action.payload.id);

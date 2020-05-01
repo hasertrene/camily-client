@@ -18,6 +18,7 @@ export default function Event(props) {
       ? dispatch(deleteEvent(id))
       : console.log("Canceled");
   };
+
   return (
     <Card.Body style={{ backgroundColor: `${colour}55` }}>
       {" "}

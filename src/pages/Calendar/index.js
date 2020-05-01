@@ -16,7 +16,7 @@ import Day from "../../components/Calendar/Day";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { selectEvents } from "../../store/events/selectors";
-import { fetchEventsByMonth } from "../../store/events/actions";
+import { fetchEventsByMonth, fetchBirthdays } from "../../store/events/actions";
 import "../../styles/style.scss";
 import { Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
@@ -46,6 +46,7 @@ export default function Calendar() {
 
   useEffect(() => {
     dispatch(fetchEventsByMonth(params));
+    dispatch(fetchBirthdays(params.month));
   }, [history.location.key, dispatch]);
 
   const nextMonth = () => {
