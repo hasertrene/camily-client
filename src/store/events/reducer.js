@@ -14,7 +14,11 @@ export default (state = initialState, action) => {
       return { ...action.payload };
 
     case FETCH_BIRTHDAYS_SUCCESS:
+<<<<<<< HEAD
       return { ...state, birthdays: [action.payload] };
+=======
+      return { ...state, birthdays: action.payload };
+>>>>>>> parent of de0c750... messed with editevent
 
     case EVENT_UPDATED:
       const newList = state.events.filter((e) => e.id !== action.payload.id);
