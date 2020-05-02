@@ -11,10 +11,14 @@ const initialState = { events: [], activities: [], birthdays: [] };
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_EVENTS_SUCCESS:
-      return { ...state, ...action.payload };
+      return { ...action.payload };
 
     case FETCH_BIRTHDAYS_SUCCESS:
+<<<<<<< HEAD
       return { ...state, birthdays: [...action.payload] };
+=======
+      return { ...state, birthdays: [action.payload] };
+>>>>>>> parent of 442bdb4... filtered the bdays from events, added birthdays to events on calendar page
 
     case EVENT_UPDATED:
       const newList = state.events.filter((e) => e.id !== action.payload.id);

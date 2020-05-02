@@ -60,7 +60,7 @@ export default function Day(props) {
       onClick={(e) => clickHandler(e)}
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
-      {format(new Date(day), "d")}
+      {format(new Date(props.date), "d")}
       <div className='calEvents'>
         {props.events.map((event) =>
           event.date.slice(5) === day.slice(5) ? (

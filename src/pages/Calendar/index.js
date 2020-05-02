@@ -15,7 +15,7 @@ import {
 import Day from "../../components/Calendar/Day";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
-import { selectEvents, selectBdays } from "../../store/events/selectors";
+import { selectEvents } from "../../store/events/selectors";
 import { fetchEventsByMonth, fetchBirthdays } from "../../store/events/actions";
 import "../../styles/style.scss";
 import { Button, Table, Container, Row, Col } from "react-bootstrap";
@@ -42,9 +42,7 @@ export default function Calendar() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const dispatch = useDispatch();
-  const eventlist = useSelector(selectEvents);
-  const birthdays = useSelector(selectBdays);
-  const events = eventlist.concat(birthdays);
+  const events = useSelector(selectEvents);
 
   useEffect(() => {
     dispatch(fetchEventsByMonth(params));
@@ -129,8 +127,6 @@ export default function Calendar() {
     start: new Date(new Date("December 25, 1995 23:15:30")),
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
-
-  console.log(events);
 
   return (
     <Container fluid='lg' className='main'>
