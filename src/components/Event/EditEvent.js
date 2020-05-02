@@ -51,6 +51,36 @@ export default function EditEvent(props) {
     }
   };
 
+  if (event.activity.type === "Birthday") {
+    return (
+      <Modal
+        {...props}
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
+        centered>
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-vcenter'>
+            Birthday of {event.member.firstName}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{event.member.firstName} turns 30</Modal.Body>
+        <Modal.Footer>
+          {props.remove && (
+            <Button
+              variant='info'
+              style={{ align: "left" }}
+              onClick={() => handleDelete(event.id)}>
+              Delete
+            </Button>
+          )}
+          <Button variant='info' onClick={props.onHide}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
   return (
     <Modal
       {...props}
