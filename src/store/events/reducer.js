@@ -15,7 +15,11 @@ export default (state = initialState, action) => {
 
     case FETCH_BIRTHDAYS_SUCCESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
       return { ...state, birthdays: [action.payload] };
+=======
+      return { ...state, birthdays: action.payload };
+>>>>>>> parent of de0c750... messed with editevent
 =======
       return { ...state, birthdays: action.payload };
 >>>>>>> parent of de0c750... messed with editevent
