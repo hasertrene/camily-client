@@ -98,12 +98,12 @@ export default function Calendar() {
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
   if (firstDay > 1) {
     const hollowDays = Array(Math.abs(1 - firstDay));
-    hollowDays.fill({ id: 9, date: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 9, date: "0001-01-01", dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
   if (firstDay === 0) {
     const hollowDays = Array(6);
-    hollowDays.fill({ id: 10, date: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 10, date: "0001-01-01", dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
 
@@ -186,7 +186,9 @@ export default function Calendar() {
               <tbody key={index}>
                 <tr>
                   {week.map((day, index) => (
-                    <td key={index} style={day.date ? {} : { opacity: "0" }}>
+                    <td
+                      key={index}
+                      style={day.date !== "0001-01-01" ? {} : { opacity: "0" }}>
                       {day.number ? (
                         <div className='cell-wkno'>{day.number}</div>
                       ) : (
