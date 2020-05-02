@@ -11,7 +11,7 @@ const initialState = { events: [], activities: [], birthdays: [] };
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_EVENTS_SUCCESS:
-      return { ...action.payload };
+      return { ...state, ...action.payload };
 
     case FETCH_BIRTHDAYS_SUCCESS:
       return { ...state, birthdays: action.payload };

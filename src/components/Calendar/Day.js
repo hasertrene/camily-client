@@ -48,7 +48,7 @@ export default function Day(props) {
     <div
       className='cell'
       style={
-        today === day
+        today.slice(5) === day.slice(5)
           ? {
               backgroundColor: "#d9534f",
               transition: "all 0.2s ease",
@@ -59,11 +59,11 @@ export default function Day(props) {
       onClick={(e) => clickHandler(e)}
       onMouseEnter={() => showDetails(true)}
       onMouseLeave={() => showDetails(false)}>
-      {format(new Date(props.date), "d")}
+      {format(new Date(day), "d")}
       <div className='calEvents'>
         {props.events.map(
           (event) =>
-            event.date === day && (
+            event.date.slice(5) === day.slice(5) && (
               <CalendarEvent
                 key={event.id}
                 event={event}
