@@ -90,20 +90,10 @@ input::-webkit-inner-spin-button {
       border-radius: 10px;
     }
     .calEvents {
-      font-size: 1.5vw;
-      line-height: 0.7rem;
+      font-size: 1vw;
     }
-    .block {
-      display: inline-block;
-      height: 10px;
-      width: 15px;
+    .eventLink {
       cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 10px;
-    }
-    .block:hover {
-      width: 90%;
-      transition: all 0.2s ease;
     }
   }
 }
