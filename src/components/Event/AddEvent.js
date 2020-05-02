@@ -9,7 +9,6 @@ import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 export default function AddEvent(props) {
   const user = useSelector(selectUser);
   const acts = useSelector(selectActs);
-  // const bday = acts.find((act) => act.type === "Birthday");
   const dispatch = useDispatch();
   const [input, setInput] = useState({ date: props.date });
   const [wholeDay, setWholeDay] = useState(input.time);
@@ -26,14 +25,6 @@ export default function AddEvent(props) {
   };
 
   const addEvent = () => {
-    if (
-      input.activityId === undefined ||
-      input.date === undefined ||
-      input.memberId === undefined
-    ) {
-      alert("Please fill in all fields!");
-      return;
-    }
     dispatch(postEvent(input));
     props.onHide();
     setInput({ date: props.date });
@@ -57,7 +48,6 @@ export default function AddEvent(props) {
               // value={input.title}
               onChange={inputHandler}
               size='lg'
-              required
             />
           </Form.Group>
           <Form.Group>
@@ -129,7 +119,6 @@ export default function AddEvent(props) {
             </Col>
             <Col sm='10'>
               <Form.Control as='select' name='memberId' onChange={inputHandler}>
-                <option value={null}></option>
                 {user.members &&
                   user.members.map((member) => (
                     <option
