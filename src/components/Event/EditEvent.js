@@ -164,11 +164,13 @@ export default function EditEvent(props) {
                 name='activityId'
                 onChange={inputHandler}>
                 {acts &&
-                  acts.map((act) => (
-                    <option key={act.id} value={act.id}>
-                      {act.type}
-                    </option>
-                  ))}
+                  acts
+                    .filter((act) => act.type !== "Birthday")
+                    .map((act) => (
+                      <option key={act.id} value={act.id}>
+                        {act.type}
+                      </option>
+                    ))}
               </Form.Control>
             </Col>
           </Form.Group>
