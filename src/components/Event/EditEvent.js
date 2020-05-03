@@ -56,7 +56,6 @@ export default function EditEvent(props) {
   const year = format(new Date(props.date), "yyyy");
   const birthYear = format(new Date(event.date), "yyyy");
   const age = year - birthYear;
-  console.log(age);
 
   if (event.activity.type === "Birthday") {
     return (
