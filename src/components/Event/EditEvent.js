@@ -48,14 +48,13 @@ export default function EditEvent(props) {
     if (window.confirm(`Are you sure you want to delete ${title} ?`) === true) {
       dispatch(deleteEvent(id));
       props.onHide();
+      setTimeout(() => history.push(history.location.pathname), 1000);
     } else {
       console.log("Canceled");
     }
   };
 
-  const year = props.date
-    ? format(new Date(props.date), "yyyy")
-    : format(new Date(props.year), "yyyy");
+  const year = props.date ? format(new Date(props.date), "yyyy") : props.year;
   const birthYear = format(new Date(event.date), "yyyy");
   const age = year - birthYear;
 
@@ -102,6 +101,28 @@ export default function EditEvent(props) {
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <Form.Group as={Row}>
+            <Col>
+              <Form.Label sm='2'>Type</Form.Label>{" "}
+            </Col>
+            <Col sm='10'>
+              <Form.Control
+                as='select'
+                defaultValue={event.activityId}
+                name='activityId'
+                onChange={inputHandler}>
+                {acts &&
+                  acts
+                    .filter((act) => act.type !== "Birthday")
+                    .map((act) => (
+                      <option key={act.id} value={act.id}>
+                        {act.type}
+                      </option>
+                    ))}
+              </Form.Control>
+            </Col>
+          </Form.Group>
+
           <Form.Group>
             <Form.Control
               type='text'
@@ -154,27 +175,6 @@ export default function EditEvent(props) {
                 />
               </Col>
             )}
-          </Form.Group>
-          <Form.Group as={Row}>
-            <Col>
-              <Form.Label sm='2'>Activity type</Form.Label>{" "}
-            </Col>
-            <Col sm='10'>
-              <Form.Control
-                as='select'
-                defaultValue={event.activityId}
-                name='activityId'
-                onChange={inputHandler}>
-                {acts &&
-                  acts
-                    .filter((act) => act.type !== "Birthday")
-                    .map((act) => (
-                      <option key={act.id} value={act.id}>
-                        {act.type}
-                      </option>
-                    ))}
-              </Form.Control>
-            </Col>
           </Form.Group>
           <Form.Group as={Row}>
             <Col>

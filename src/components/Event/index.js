@@ -34,7 +34,11 @@ export default function Event(props) {
           </span>{" "}
         </Col>
         <Col className='eventClick' onClick={() => setModalShow(true)}>
-          <strong>{props.title}</strong>
+          <strong>
+            {activity.type !== "Birthday"
+              ? props.title
+              : `Birthday of ${props.title}`}
+          </strong>
         </Col>{" "}
         <Col className='eventClick' onClick={() => setModalShow(true)}>
           <em>{props.time ? props.time : `All-day`}</em>

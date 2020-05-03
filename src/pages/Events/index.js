@@ -49,7 +49,7 @@ export default function Events() {
     history.push(`/events/${Number(params.year) - 1}`);
   };
 
-  console.log(birthdays);
+  // console.log(params.year);
 
   return (
     <Container fluid='lg' className='main'>

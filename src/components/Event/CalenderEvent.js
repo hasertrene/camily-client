@@ -16,7 +16,11 @@ export default function CalenderEvent(props) {
           className='block'>
           &#9608;{" "}
         </span>
-        {props.details && event.title}
+        {props.details
+          ? event.activity.type === "Birthday"
+            ? `Bday of ${event.title}`
+            : event.title
+          : ""}
       </span>
       <EditEvent
         remove='true'
