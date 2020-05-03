@@ -216,6 +216,9 @@ export const fetchBirthdays = (month) => {
     const token = selectToken(getState());
     dispatch(appLoading());
     try {
+      if (!month) {
+        month = "";
+      }
       const response = await axios.get(`${apiUrl}/events/birthdays/${month}`, {
         headers: { Authorization: `Bearer ${token}` },
       });

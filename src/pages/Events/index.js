@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col, Card, Accordion, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { selectEvents } from "../../store/events/selectors";
-import { fetchEventsByYear } from "../../store/events/actions";
+import { selectEvents, selectBdays } from "../../store/events/selectors";
+import { fetchEventsByYear, fetchBirthdays } from "../../store/events/actions";
 import { useParams, useHistory } from "react-router-dom";
 import Event from "../../components/Event/index.js";
 import { format, getYear } from "date-fns";
 
 export default function Events() {
   const dispatch = useDispatch();
-  const events = useSelector(selectEvents);
+
+  const eventlist = useSelector(selectEvents);
+  const birthdays = useSelector(selectBdays);
+  const events = eventlist.concat(birthdays);
+
   const date = { year: getYear(new Date()) };
   const getParams = useParams();
   const history = useHistory();
@@ -21,6 +25,7 @@ export default function Events() {
 
   useEffect(() => {
     dispatch(fetchEventsByYear(params.year));
+    dispatch(fetchBirthdays());
   }, [history.location.key, dispatch]);
 
   // Gather events per month: [m]
@@ -43,6 +48,8 @@ export default function Events() {
   const previousYear = () => {
     history.push(`/events/${Number(params.year) - 1}`);
   };
+
+  console.log(birthdays);
 
   return (
     <Container fluid='lg' className='main'>
@@ -76,7 +83,7 @@ export default function Events() {
                   </Accordion.Toggle>
                   {events.map((e, i) => (
                     <Accordion.Collapse key={i} eventKey={index}>
-                      <Event {...e} />
+                      <Event {...e} year={params.year} />
                     </Accordion.Collapse>
                   ))}
                 </Card>

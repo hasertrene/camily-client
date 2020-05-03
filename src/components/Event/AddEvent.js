@@ -56,6 +56,7 @@ export default function AddEvent(props) {
               name='title'
               // value={input.title}
               onChange={inputHandler}
+              placeholder='Title'
               size='lg'
               required
             />
@@ -65,6 +66,7 @@ export default function AddEvent(props) {
               as='textarea'
               rows='3'
               name='description'
+              placeholder='Description'
               // value={input.description}
               onChange={inputHandler}
             />

@@ -57,6 +57,7 @@ export default function Event(props) {
         show={modalShow}
         onHide={() => setModalShow(false)}
         event={props}
+        year={props.year}
       />
     </Card.Body>
   );
