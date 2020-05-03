@@ -4,11 +4,4 @@ $base-color: white;
 
 html,
 body {
-  background-color: $base-color;
-  z-index: -1;
-}
-
-.App {
-  background-color: $base-color;
-  z-index: 1;
 }

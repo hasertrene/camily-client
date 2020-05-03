@@ -219,7 +219,6 @@ export const fetchBirthdays = (month) => {
       const response = await axios.get(`${apiUrl}/events/birthdays/${month}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(response.data.birthdays);
       dispatch(fetchBirthdaysSuccess(response.data.birthdays));
       dispatch(appDoneLoading());
     } catch (error) {

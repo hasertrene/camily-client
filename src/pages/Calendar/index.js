@@ -15,7 +15,7 @@ import {
 import Day from "../../components/Calendar/Day";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
-import { selectEvents } from "../../store/events/selectors";
+import { selectEvents, selectBdays } from "../../store/events/selectors";
 import { fetchEventsByMonth, fetchBirthdays } from "../../store/events/actions";
 import "../../styles/style.scss";
 import { Button, Table, Container, Row, Col } from "react-bootstrap";
@@ -42,7 +42,9 @@ export default function Calendar() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const dispatch = useDispatch();
-  const events = useSelector(selectEvents);
+  const eventlist = useSelector(selectEvents);
+  const birthdays = useSelector(selectBdays);
+  const events = eventlist.concat(birthdays);
 
   useEffect(() => {
     dispatch(fetchEventsByMonth(params));
@@ -96,12 +98,12 @@ export default function Calendar() {
   // If the first day of the month is not a monday, add 'hollow days' to fill in the Table.
   if (firstDay > 1) {
     const hollowDays = Array(Math.abs(1 - firstDay));
-    hollowDays.fill({ id: 9, date: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 9, date: "0001-01-01", dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
   if (firstDay === 0) {
     const hollowDays = Array(6);
-    hollowDays.fill({ id: 10, date: null, dayOfTheWeek: 7 }, 0);
+    hollowDays.fill({ id: 10, date: "0001-01-01", dayOfTheWeek: 7 }, 0);
     calendar = hollowDays.concat(calendar);
   }
 
@@ -127,6 +129,8 @@ export default function Calendar() {
     start: new Date(new Date("December 25, 1995 23:15:30")),
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
+
+  console.log(birthdays);
 
   return (
     <Container fluid='lg' className='main'>
@@ -182,7 +186,9 @@ export default function Calendar() {
               <tbody key={index}>
                 <tr>
                   {week.map((day, index) => (
-                    <td key={index} style={day.date ? {} : { opacity: "0" }}>
+                    <td
+                      key={index}
+                      style={day.date !== "0001-01-01" ? {} : { opacity: "0" }}>
                       {day.number ? (
                         <div className='cell-wkno'>{day.number}</div>
                       ) : (
