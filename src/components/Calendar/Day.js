@@ -69,6 +69,7 @@ export default function Day(props) {
                 event={event}
                 details={details}
                 user={props.user}
+                date={props.date}
               />
             )
         )}

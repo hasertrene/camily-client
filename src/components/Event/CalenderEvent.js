@@ -29,6 +29,7 @@ export default function CalenderEvent(props) {
         onHide={() => setModalShow(false)}
         event={event}
         user={props.user}
+        date={props.date}
       />
     </div>
   );

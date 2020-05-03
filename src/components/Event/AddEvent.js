@@ -157,3 +157,5 @@ export default function AddEvent(props) {
     </Modal>
   );
 }
+
+// IF act type changes to birthday change the form

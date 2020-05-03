@@ -5,7 +5,7 @@ import { selectUser } from "../../store/user/selectors";
 import { useHistory } from "react-router-dom";
 import { updateEvent, deleteEvent } from "../../store/events/actions";
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
-import "../../styles/style.scss";
+import { format } from "date-fns";
 
 export default function EditEvent(props) {
   const user = useSelector(selectUser);
@@ -41,15 +41,22 @@ export default function EditEvent(props) {
   };
 
   const handleDelete = (id) => {
-    if (
-      window.confirm(`Are you sure you want to delete ${event.title}?`) === true
-    ) {
+    const title =
+      event.activity.type !== "Birthday"
+        ? event.title
+        : "the birthday of " + event.title;
+    if (window.confirm(`Are you sure you want to delete ${title} ?`) === true) {
       dispatch(deleteEvent(id));
       props.onHide();
     } else {
       console.log("Canceled");
     }
   };
+
+  const year = format(new Date(props.date), "yyyy");
+  const birthYear = format(new Date(event.date), "yyyy");
+  const age = year - birthYear;
+  console.log(age);
 
   if (event.activity.type === "Birthday") {
     return (
@@ -60,10 +67,12 @@ export default function EditEvent(props) {
         centered>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-vcenter'>
-            Birthday of {event.member.firstName}
+            Birthday of {event.title}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{event.member.firstName} turns 30</Modal.Body>
+        <Modal.Body>
+          {event.title} turns {age}
+        </Modal.Body>
         <Modal.Footer>
           {props.remove && (
             <Button
