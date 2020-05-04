@@ -130,7 +130,7 @@ export default function Calendar() {
     end: new Date(addDays(new Date("December 25, 1995 23:15:30"), 6)),
   });
 
-  console.log(birthdays);
+  // console.log(birthdays);
 
   return (
     <Container fluid='lg' className='main'>

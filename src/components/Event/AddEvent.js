@@ -35,8 +35,9 @@ export default function AddEvent(props) {
     setInput({ date: props.date });
   };
 
+  // If event type is set to birthday, change the form for a birthday form
   if (input.activityId === "3") {
-    console.log("does change");
+    console.log("Birthday");
     return (
       <Modal
         {...props}
@@ -101,7 +102,7 @@ export default function AddEvent(props) {
         </Modal.Footer>
       </Modal>
     );
-  } else {
+  } else if (input.activityId !== "3") {
     return (
       <Modal
         {...props}
@@ -229,5 +230,3 @@ export default function AddEvent(props) {
     );
   }
 }
-
-// IF act type changes to birthday change the form

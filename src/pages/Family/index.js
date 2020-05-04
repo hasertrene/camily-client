@@ -69,6 +69,21 @@ export default function Family() {
           />
           <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            type='password'
+            placeholder='Password'
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mt-5'>
+          <Button variant='info' type='submit' onClick={submitForm}>
+            Save changes...
+          </Button>
+        </Form.Group>
         <hr />
         <div
           style={{
@@ -127,22 +142,6 @@ export default function Family() {
             show={modalShow}
             onHide={() => setModalShow(false)}></AddMember>
         </div>
-        <hr />
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            type='password'
-            placeholder='Password'
-            required
-          />
-        </Form.Group>
-        <Form.Group className='mt-5'>
-          <Button variant='info' type='submit' onClick={submitForm}>
-            Save changes...
-          </Button>
-        </Form.Group>
       </Form>
     </Container>
   );
