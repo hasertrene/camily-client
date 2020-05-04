@@ -34,7 +34,7 @@ export default function SignUp() {
     <Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className='mt-5'>
         <h1 className='loginLogo'>Camily</h1>
-        <h5 style={{ textAlign: "center", margin: "1.1rem" }}>
+        <h5 style={{ textAlign: "center", margin: "1.2rem" }}>
           A family calendar
         </h5>
         <h1 className='mt-5 mb-5'>Login</h1>
