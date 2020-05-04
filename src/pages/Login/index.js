@@ -6,7 +6,7 @@ import { login } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -33,6 +33,10 @@ export default function SignUp() {
   return (
     <Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className='mt-5'>
+        <h1 className='loginLogo'>Camily</h1>
+        <h5 style={{ textAlign: "center", margin: "1.1rem" }}>
+          A family calendar
+        </h5>
         <h1 className='mt-5 mb-5'>Login</h1>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap");
 $base-color: white;
 $day-highlight: #d9534f;
 $shadow: 2px 2px 1px rgba(68, 68, 68, 0.3);
@@ -5,6 +6,13 @@ $calendar-hover: rgb(255, 153, 0);
 $table-head: #5bc0de;
 $cell-width: 7vw;
 $cell-height: 7.5vw;
+
+.loginLogo {
+  font-family: "Spicy Rice", cursive;
+  padding: 0.5rem 1.5rem;
+  height: 40px;
+  font-size: 3rem;
+}
 
 .main {
   background-color: $base-color;
